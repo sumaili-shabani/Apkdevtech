@@ -139,10 +139,34 @@ class crud_model extends CI_Model{
 	var $order_column21 = array(null, "nom","description","lien", "created_at");
 	// fin video
 
+	// opertion tinfo_projet
+	var $table22 = "tinfo_projet";  
+	var $select_column22 = array("idtinfo_projet", "titre","description","image", "created_at");  
+	var $order_column22 = array(null, "titre","description","image", "created_at");
+	// fin de la tinfo_projet
+
+	// opertion tinfo_projet_mini
+	var $table23 = "tinfo_projet_mini";  
+	var $select_column23 = array("idtinfo_projet_mini", "titre","montant","description","image", "created_at");  
+	var $order_column23 = array(null, "titre","description","montant","image", "created_at");
+	// fin de la tinfo_projet_mini
+
 	function fetch_pagination_online(){
 	    $query = $this->db->get("profile_online");
 	    return $query->num_rows();
 	}
+
+	 //insertion des photos pour la galerie
+	function insert_galery($data)  
+	{  
+	    $this->db->insert('galery', $data);  
+	}
+	//suppression des photos pour la galerie
+	function delete_photo_galery($idg)  
+    {  
+         $this->db->where("idg", $idg);  
+         $this->db->delete("galery");  
+    }
 	  // recherche des produits par fultres
     function fetch_data_search_online_user($query)
     {
@@ -3603,11 +3627,18 @@ class crud_model extends CI_Model{
 	    } 
 	  ///fin de la video information
 
-	    // information de contact 
+	// information de contact 
     // pagination contact
     function fetch_pagination_message_auditeur(){
       $this->db->order_by("id", "DESC");
       $query = $this->db->get("contact");
+      return $query->num_rows();
+    }
+
+    // pagination contact
+    function fetch_pagination_galery(){
+      $this->db->order_by("idg", "DESC");
+      $query = $this->db->get("galery");
       return $query->num_rows();
     }
 
@@ -3718,6 +3749,37 @@ class crud_model extends CI_Model{
       }
       // fin pagination
 
+      // pagination galery utilisateur
+      function fetch_details_pagination_galery($limit, $start){
+          $output = '';
+        $this->db->select("*");
+        $this->db->from("galery");
+        // $this->db->order_by("nom", "ASC");
+        $this->db->order_by("idg", "DESC");
+
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        
+        foreach($query->result() as $row)
+        {
+          
+         $output .= '
+
+        <div class="col-md-3" align="center" style="margin-bottom:24px;">
+	      <img src="'.base_url().'upload/galery/'.$row->image.'" class="img-thumbnail img-responsive" style="height: 200px;" />
+	      	<br />
+			<input type="checkbox" name="images[]" idg="'.$row->idg.'" class="select checkbox_id image_galery" value="upload/galery/'.$row->image.'" /> &nbsp;
+			<a href="javascript:void(0);" class="text-danger supprimer" idg="'.$row->idg.'">
+				<i class="fa fa-trash"></i> supprimer
+			</a>
+	     </div>
+         ';
+        }
+        
+        return $output;
+      }
+      // fin pagination
+
       // recherche des contacts
      function fetch_data_search_contactAuditeur_to_lean($query)
      {
@@ -3749,6 +3811,149 @@ class crud_model extends CI_Model{
     }
 
     // fin operation script contact
+
+     // script pour les projets du landing tinfo_projet 
+	 function make_query_tinfo_projet()  
+	 {  
+	        
+	       $this->db->select($this->select_column22);  
+	       $this->db->from($this->table22);  
+	       if(isset($_POST["search"]["value"]))  
+	       {  
+	            $this->db->like("idtinfo_projet", $_POST["search"]["value"]);  
+	            $this->db->or_like("titre", $_POST["search"]["value"]);
+	            $this->db->or_like("description", $_POST["search"]["value"]);
+	       }  
+	       if(isset($_POST["order"]))  
+	       {  
+	            $this->db->order_by($this->order_column22[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
+	       }  
+	       else  
+	       {  
+	            $this->db->order_by('idtinfo_projet', 'DESC');  
+	       }  
+	  }
+
+	 function make_datatables_tinfo_projet(){  
+	       $this->make_query_tinfo_projet();  
+	       if($_POST["length"] != -1)  
+	       {  
+	            $this->db->limit($_POST['length'], $_POST['start']);  
+	       }  
+	       $query = $this->db->get();  
+	       return $query->result();  
+	  }
+
+	  function get_filtered_data_tinfo_projet(){  
+	       $this->make_query_tinfo_projet();  
+	       $query = $this->db->get();  
+	       return $query->num_rows();  
+	  }       
+	  function get_all_data_tinfo_projet()  
+	  {  
+	       $this->db->select("*");  
+	       $this->db->from($this->table22);  
+	       return $this->db->count_all_results();  
+	  }
+
+	  function insert_tinfo_projet($data)  
+	  {  
+	       $this->db->insert('tinfo_projet', $data);  
+	  }
+
+	  
+	  function update_tinfo_projet($idtinfo_projet, $data)  
+	  {  
+	       $this->db->where("idtinfo_projet", $idtinfo_projet);  
+	       $this->db->update("tinfo_projet", $data);  
+	  }
+
+
+	  function delete_tinfo_projet($idtinfo_projet)  
+	  {  
+	       $this->db->where("idtinfo_projet", $idtinfo_projet);  
+	       $this->db->delete("tinfo_projet");  
+	  }
+
+	  function fetch_single_tinfo_projet($idtinfo_projet)  
+	  {  
+	       $this->db->where("idtinfo_projet", $idtinfo_projet);  
+	       $query=$this->db->get('tinfo_projet');  
+	       return $query->result();  
+	  } 
+	// fin de script tinfo_projet
+
+	  // script pour les mini- projets du landing tinfo_projet_mini 
+	 function make_query_tinfo_projet_mini()  
+	 {  
+	        
+	       $this->db->select($this->select_column23);  
+	       $this->db->from($this->table23);  
+	       if(isset($_POST["search"]["value"]))  
+	       {  
+	            $this->db->like("idtinfo_projet_mini", $_POST["search"]["value"]);  
+	            $this->db->or_like("titre", $_POST["search"]["value"]);
+	            $this->db->or_like("description", $_POST["search"]["value"]);
+	       }  
+	       if(isset($_POST["order"]))  
+	       {  
+	            $this->db->order_by($this->order_column23[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
+	       }  
+	       else  
+	       {  
+	            $this->db->order_by('idtinfo_projet_mini', 'DESC');  
+	       }  
+	  }
+
+	 function make_datatables_tinfo_projet_mini(){  
+	       $this->make_query_tinfo_projet_mini();  
+	       if($_POST["length"] != -1)  
+	       {  
+	            $this->db->limit($_POST['length'], $_POST['start']);  
+	       }  
+	       $query = $this->db->get();  
+	       return $query->result();  
+	  }
+
+	  function get_filtered_data_tinfo_projet_mini(){  
+	       $this->make_query_tinfo_projet_mini();  
+	       $query = $this->db->get();  
+	       return $query->num_rows();  
+	  }       
+	  function get_all_data_tinfo_projet_mini()  
+	  {  
+	       $this->db->select("*");  
+	       $this->db->from($this->table23);  
+	       return $this->db->count_all_results();  
+	  }
+
+	  function insert_tinfo_projet_mini($data)  
+	  {  
+	       $this->db->insert('tinfo_projet_mini', $data);  
+	  }
+
+	  
+	  function update_tinfo_projet_mini($idtinfo_projet_mini, $data)  
+	  {  
+	       $this->db->where("idtinfo_projet_mini", $idtinfo_projet_mini);  
+	       $this->db->update("tinfo_projet_mini", $data);  
+	  }
+
+
+	  function delete_tinfo_projet_mini($idtinfo_projet_mini)  
+	  {  
+	       $this->db->where("idtinfo_projet_mini", $idtinfo_projet_mini);  
+	       $this->db->delete("tinfo_projet_mini");  
+	  }
+
+	  function fetch_single_tinfo_projet_mini($idtinfo_projet_mini)  
+	  {  
+	       $this->db->where("idtinfo_projet_mini", $idtinfo_projet_mini);  
+	       $query=$this->db->get('tinfo_projet_mini');  
+	       return $query->result();  
+	  } 
+	// fin de script tinfo_projet_mini
+
 
 
 

@@ -34,9 +34,20 @@ class admin extends CI_Controller
       $data['title']="Information personnel";
       $this->load->view('backend/admin/landing/info_personnel', $data);
     }
+
     function info_service(){
       $data['title']="Information sur les services";
       $this->load->view('backend/admin/landing/info_service', $data);
+    }
+
+    function info_projet(){
+    	$data['title']="Information sur les projets";
+      	$this->load->view('backend/admin/landing/info_projet', $data);
+    }
+
+    function info_mini_projet(){
+    	$data['title']="Information sur les projets";
+      	$this->load->view('backend/admin/landing/info_mini_projet', $data);
     }
 
     function info_choix(){
@@ -54,10 +65,19 @@ class admin extends CI_Controller
       $this->load->view('backend/admin/landing/info_membre', $data);
     }
 
+
+
     function video(){
       $data['title']="Paramétrage  de nos vidéos";  
       $this->load->view('backend/admin/landing/video', $data);  
     }
+
+    function galery(){
+    	$data['title']="Paramétrage  des galeries photos";  
+      $this->load->view('backend/admin/landing/galery', $data); 
+    }
+
+
 
     function contact_info(){
       $data['title']="Les informations de contact";
@@ -3914,6 +3934,243 @@ class admin extends CI_Controller
 
   // fin de sript video 
 
+    // script de  tinfo_projet
+    function fetch_tinfo_projet(){  
+
+         $fetch_data = $this->crud_model->make_datatables_tinfo_projet();  
+         $data = array();  
+         foreach($fetch_data as $row)  
+         {  
+              $sub_array = array();  
+
+              $sub_array[] = '<img src="'.base_url().'upload/projet/'.$row->image.'" class="img-thumbnail" width="50" height="35" />';  
+             
+              $sub_array[] = nl2br(substr($row->titre, 0,50)).' ...';
+              $sub_array[] = nl2br(substr($row->description, 0,50)).' ...';
+
+              $sub_array[] = nl2br(substr(date(DATE_RFC822, strtotime($row->created_at)), 0, 23)); 
+             
+
+              $sub_array[] = '<button type="button" name="update" idtinfo_projet="'.$row->idtinfo_projet.'" class="btn btn-warning btn-xs update"><i class="fa fa-edit"></i></button>';  
+              $sub_array[] = '<button type="button" name="delete" idtinfo_projet="'.$row->idtinfo_projet.'" class="btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></button>';  
+              $data[] = $sub_array;  
+         }  
+         $output = array(  
+              "draw"                =>     intval($_POST["draw"]),  
+              "recordsTotal"        =>     $this->crud_model->get_all_data_tinfo_projet(),  
+              "recordsFiltered"     =>     $this->crud_model->get_filtered_data_tinfo_projet(),  
+              "data"                =>     $data  
+         );  
+         echo json_encode($output);  
+    }
+
+    function fetch_single_tinfo_projet()  
+    {  
+         $output = array();  
+         $data = $this->crud_model->fetch_single_tinfo_projet($_POST["idtinfo_projet"]);  
+         foreach($data as $row)  
+         {  
+              $output['titre']    = $row->titre; 
+              $output['description']    = $row->description;
+
+              if($row->image != '')  
+              {  
+                   $output['user_image'] = '<img src="'.base_url().'upload/projet/'.$row->image.'" class="img-thumbnail" width="300" height="250" /><input type="hidden" name="hidden_user_image" value="'.$row->image.'" />';  
+              }  
+              else  
+              {  
+                   $output['user_image'] = '<input type="hidden" name="hidden_user_image" value="" />';  
+              }  
+              
+             
+         }  
+         echo json_encode($output);  
+    }  
+
+
+    function operation_tinfo_projet(){
+
+      if($_FILES["user_image"]["size"] > 0)  
+      {  
+           $insert_data = array(  
+               'titre'            =>     $this->input->post('titre'),
+               'description'      =>     $this->input->post('description'),
+               'image'            =>     $this->upload_image_projet()
+            );    
+      }  
+      else  
+      {  
+             $user_image = "icone-user.jpg";  
+             $insert_data = array(  
+                   'titre'            =>     $this->input->post('titre'),
+                   'description'      =>     $this->input->post('description'),
+                   'image'            =>     $user_image
+            );  
+      }
+
+        
+
+      $requete=$this->crud_model->insert_tinfo_projet($insert_data);
+      echo("Ajout information avec succès");
+      
+    }
+
+    function modification_tinfo_projet(){
+
+      if($_FILES["user_image"]["size"] > 0)  
+      {  
+           $updated_data = array(  
+               'titre'            =>     $this->input->post('titre'),
+               'description'      =>     $this->input->post('description'),
+               'image'            =>     $this->upload_image_projet()
+            );    
+      }  
+      else  
+      {    
+             $updated_data = array(  
+                   'titre'            =>     $this->input->post('titre'),
+                   'description'      =>     $this->input->post('description')
+            );  
+      }
+
+      $this->crud_model->update_tinfo_projet($this->input->post("idtinfo_projet"), $updated_data);
+
+      echo("modification avec succès");
+
+    }
+
+    function supression_tinfo_projet(){
+
+        $this->crud_model->delete_tinfo_projet($this->input->post("idtinfo_projet"));
+        echo("suppression avec succès");
+      
+    }
+    // fin informations tinfo_projet
+
+     // script de  tinfo_projet_mini
+    function fetch_tinfo_projet_mini(){  
+
+         $fetch_data = $this->crud_model->make_datatables_tinfo_projet_mini();  
+         $data = array();  
+         foreach($fetch_data as $row)  
+         {  
+              $sub_array = array();  
+
+              $sub_array[] = '<img src="'.base_url().'upload/projet/'.$row->image.'" class="img-thumbnail" width="50" height="35" />';  
+             
+              $sub_array[] = nl2br(substr($row->titre, 0,50)).' ...';
+              $sub_array[] = nl2br(substr($row->description, 0,40)).' ...';
+
+              $sub_array[] = nl2br(substr($row->montant, 0,10)).' $';
+
+              $sub_array[] = nl2br(substr(date(DATE_RFC822, strtotime($row->created_at)), 0, 23)); 
+             
+
+              $sub_array[] = '<button type="button" name="update" idtinfo_projet_mini="'.$row->idtinfo_projet_mini.'" class="btn btn-warning btn-xs update"><i class="fa fa-edit"></i></button>';  
+              $sub_array[] = '<button type="button" name="delete" idtinfo_projet_mini="'.$row->idtinfo_projet_mini.'" class="btn btn-danger btn-xs delete"><i class="fa fa-trash"></i></button>';  
+              $data[] = $sub_array;  
+         }  
+         $output = array(  
+              "draw"                =>     intval($_POST["draw"]),  
+              "recordsTotal"        =>     $this->crud_model->get_all_data_tinfo_projet_mini(),  
+              "recordsFiltered"     =>     $this->crud_model->get_filtered_data_tinfo_projet_mini(),  
+              "data"                =>     $data  
+         );  
+         echo json_encode($output);  
+    }
+
+    function fetch_single_tinfo_projet_mini()  
+    {  
+         $output = array();  
+         $data = $this->crud_model->fetch_single_tinfo_projet_mini($_POST["idtinfo_projet_mini"]);  
+         foreach($data as $row)  
+         {  
+              $output['titre']    		= $row->titre; 
+              $output['description']    = $row->description;
+
+              if($row->image != '')  
+              {  
+                   $output['user_image'] = '<img src="'.base_url().'upload/projet/'.$row->image.'" class="img-thumbnail" width="300" height="250" /><input type="hidden" name="hidden_user_image" value="'.$row->image.'" />';  
+              }  
+              else  
+              {  
+                   $output['user_image'] = '<input type="hidden" name="hidden_user_image" value="" />';  
+              }  
+              
+             
+         }  
+         echo json_encode($output);  
+    }  
+
+
+    function operation_tinfo_projet_mini(){
+
+      if($_FILES["user_image"]["size"] > 0)  
+      {  
+           $insert_data = array(  
+               'titre'            =>     $this->input->post('titre'),
+               'description'      =>     $this->input->post('description'),
+               'montant'          =>     $this->input->post('montant'),
+               'image'            =>     $this->upload_image_projet()
+            );    
+      }  
+      else  
+      {  
+             $user_image = "icone-user.jpg";  
+             $insert_data = array(  
+                   'titre'            =>     $this->input->post('titre'),
+                   'description'      =>     $this->input->post('description'),
+                   'montant'          =>     $this->input->post('montant'),
+                   'image'            =>     $user_image
+            );  
+      }
+
+        
+
+      $requete=$this->crud_model->insert_tinfo_projet_mini($insert_data);
+      echo("Ajout information avec succès");
+      
+    }
+
+    function modification_tinfo_projet_mini(){
+
+      if($_FILES["user_image"]["size"] > 0)  
+      {  
+           $updated_data = array(  
+               'titre'            =>     $this->input->post('titre'),
+               'description'      =>     $this->input->post('description'),
+               'montant'          =>     $this->input->post('montant'),
+               'image'            =>     $this->upload_image_projet()
+            );    
+      }  
+      else  
+      {    
+             $updated_data = array(  
+                   'titre'            =>     $this->input->post('titre'),
+                   'montant'          =>     $this->input->post('montant'),
+                   'description'      =>     $this->input->post('description')
+            );  
+      }
+
+      $this->crud_model->update_tinfo_projet_mini($this->input->post("idtinfo_projet_mini"), $updated_data);
+
+      echo("modification avec succès");
+
+    }
+
+    function supression_tinfo_projet_mini(){
+
+        $this->crud_model->delete_tinfo_projet_mini($this->input->post("idtinfo_projet_mini"));
+        echo("suppression avec succès");
+      
+    }
+    // fin informations tinfo_projet_mini
+
+
+
+
+
+
 // script pour formulaire de contact 
 // recherche de contact
  function fetch_search_contact_message_auteur()
@@ -4035,163 +4292,270 @@ class admin extends CI_Controller
 
 
 
-function operation_contact(){
+	function operation_contact(){
 
-  if ($_FILES['user_image']['size'] > 0) {
-  
-  $logo = $this->upload_image_fichier_contact_radio();
-  $insert_data = array(  
+	  if ($_FILES['user_image']['size'] > 0) {
+	  
+	  $logo = $this->upload_image_fichier_contact_radio();
+	  $insert_data = array(  
 
-           'nom'           =>     $this->input->post('name'),  
-           'sujet'         =>     $this->input->post("subject"),
-           'email'         =>     $this->input->post("email"),  
-           'message'       =>     $this->input->post("message"),
-           'fichier'       =>     $logo  
-           
-   ); 
-
-
-      $requete=$this->crud_model->insert_contact($insert_data);
-      echo("Nous vous répondrons dans un instant");
-
-  
-}
-else{
-
-  $insert_data = array(  
-
-           'nom'           =>     $this->input->post('name'),  
-           'sujet'         =>     $this->input->post("subject"),
-           'email'         =>     $this->input->post("email"),  
-           'message'       =>     $this->input->post("message")              
-   ); 
+	           'nom'           =>     $this->input->post('name'),  
+	           'sujet'         =>     $this->input->post("subject"),
+	           'email'         =>     $this->input->post("email"),  
+	           'message'       =>     $this->input->post("message"),
+	           'fichier'       =>     $logo  
+	           
+	   ); 
 
 
-      $requete=$this->crud_model->insert_contact($insert_data);
-      echo("Nous vous répondrons dans un instant");
-}
+	      $requete=$this->crud_model->insert_contact($insert_data);
+	      echo("Nous vous répondrons dans un instant");
 
-     
-   
-    
-  }
+	  
+	}
+	else{
 
-   // pagination contact 
- function pagination_contact_auditeurs()
-{
+	  $insert_data = array(  
 
-$this->load->library("pagination");
-$config = array();
-$config["base_url"] = "#";
-$config["total_rows"] = $this->crud_model->fetch_pagination_message_auditeur();
-$config["per_page"] = 4;
-$config["uri_segment"] = 3;
-$config["use_page_numbers"] = TRUE;
-$config["full_tag_open"] = '<ul class="pagination">';
-$config["full_tag_close"] = '</ul>';
-$config["first_tag_open"] = '<li class="page-item">';
-$config["first_tag_close"] = '</li>';
-$config["last_tag_open"] = '<li class="page-item">';
-$config["last_tag_close"] = '</li>';
-$config['next_link'] = '<li class="page-item active"><i class="btn btn-info">&gt;&gt;</i>';
-$config["next_tag_open"] = '<li class="page-item">';
-$config["next_tag_close"] = '</li>';
-$config["prev_link"] = '<li class="page-item active"><i class="btn btn-info">&lt;&lt;</i>';
-$config["prev_tag_open"] = "<li class='page-item'>";
-$config["prev_tag_close"] = "</li>";
-$config["cur_tag_open"] = "<li class='page-item active'><a href='#' class='page-link'>";
-$config["cur_tag_close"] = "</a></li>";
-$config["num_tag_open"] = "<li class='page-item'>";
-$config["num_tag_close"] = "</li>";
-$config["num_links"] = 1;
-$this->pagination->initialize($config);
-$page = $this->uri->segment(3);
-$start = ($page - 1) * $config["per_page"];
-
-$output = array(
- 'pagination_link' => $this->pagination->create_links(),
- 'country_table'   => $this->crud_model->fetch_details_pagination_contact_message_auditeur($config["per_page"], $start)
-);
-echo json_encode($output);
-}
-  // fin pagination
+	           'nom'           =>     $this->input->post('name'),  
+	           'sujet'         =>     $this->input->post("subject"),
+	           'email'         =>     $this->input->post("email"),  
+	           'message'       =>     $this->input->post("message")              
+	   ); 
 
 
-function fetch_single_information_contact()  
-  {  
-       $output = array();  
-       $data = $this->crud_model->fetch_single_contact_information($this->input->post('id'));  
-       foreach($data as $row)  
-       {  
-            $output['nom'] = $row->nom; 
-            $output['sujet'] = $row->sujet;
-            $output['email'] = $row->email; 
-            $output['message'] = $row->message; 
+	      $requete=$this->crud_model->insert_contact($insert_data);
+	      echo("Nous vous répondrons dans un instant");
+	}
 
-       }  
-       echo json_encode($output);  
-  } 
+	     
+	   
+	    
+	  }
 
+	   // pagination contact 
+	 function pagination_contact_auditeurs()
+	{
 
-  function infomation_par_mail_contact()
- {
-    if($this->input->post('checkbox_value'))
-    {
-       $id = $this->input->post('checkbox_value');
-       for($count = 0; $count < count($id); $count++)
-       {
-           
-            $mail    = $id[$count];
-            $website = "ubfm@gmail.com";
+	$this->load->library("pagination");
+	$config = array();
+	$config["base_url"] = "#";
+	$config["total_rows"] = $this->crud_model->fetch_pagination_message_auditeur();
+	$config["per_page"] = 4;
+	$config["uri_segment"] = 3;
+	$config["use_page_numbers"] = TRUE;
+	$config["full_tag_open"] = '<ul class="pagination">';
+	$config["full_tag_close"] = '</ul>';
+	$config["first_tag_open"] = '<li class="page-item">';
+	$config["first_tag_close"] = '</li>';
+	$config["last_tag_open"] = '<li class="page-item">';
+	$config["last_tag_close"] = '</li>';
+	$config['next_link'] = '<li class="page-item active"><i class="btn btn-info">&gt;&gt;</i>';
+	$config["next_tag_open"] = '<li class="page-item">';
+	$config["next_tag_close"] = '</li>';
+	$config["prev_link"] = '<li class="page-item active"><i class="btn btn-info">&lt;&lt;</i>';
+	$config["prev_tag_open"] = "<li class='page-item'>";
+	$config["prev_tag_close"] = "</li>";
+	$config["cur_tag_open"] = "<li class='page-item active'><a href='#' class='page-link'>";
+	$config["cur_tag_close"] = "</a></li>";
+	$config["num_tag_open"] = "<li class='page-item'>";
+	$config["num_tag_close"] = "</li>";
+	$config["num_links"] = 1;
+	$this->pagination->initialize($config);
+	$page = $this->uri->segment(3);
+	$start = ($page - 1) * $config["per_page"];
 
-            $to =$id[$count];
-            $subject = $this->input->post('sujet');
-            $message2 = $this->input->post('message');
-             
-
-            $headers= "MIME Version 1.0\r\n";
-            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-            $headers .= "From: no-reply@ubfm.com" . "\r\n" ."Reply-to: sumailiroger681@gmail.com"."\r\n"."X-Mailer: PHP/".phpversion();
-
-            mail($to,$subject,$message2,$headers);
-
-       }
-
-       if(mail($to,$subject,$message2,$headers) > 0){
-            echo("message envoyé avec succès");
-       } 
-       else {
-            echo("Problème de connexion veillez  patienter!!!!!!!!!!!!");
-       }
-
-
-    }
- }
-
- function supression_information_contact_visite()
- {
-
-      if($this->input->post('checkbox_value'))
-      {
-         $id = $this->input->post('checkbox_value');
-         for($count = 0; $count < count($id); $count++)
-         {
-             
-              $mail    = $id[$count];
-              $this->crud_model->delete_information_contact_send($mail);
-
-            echo("suppression avec succès");
-
-         }
-
-         
+	$output = array(
+	 'pagination_link' => $this->pagination->create_links(),
+	 'country_table'   => $this->crud_model->fetch_details_pagination_contact_message_auditeur($config["per_page"], $start)
+	);
+	echo json_encode($output);
+	}
+	  // fin pagination
 
 
-      } 
+	function fetch_single_information_contact()  
+	  {  
+	       $output = array();  
+	       $data = $this->crud_model->fetch_single_contact_information($this->input->post('id'));  
+	       foreach($data as $row)  
+	       {  
+	            $output['nom'] = $row->nom; 
+	            $output['sujet'] = $row->sujet;
+	            $output['email'] = $row->email; 
+	            $output['message'] = $row->message; 
 
-        
-      
-}
+	       }  
+	       echo json_encode($output);  
+	  } 
+
+
+	  function infomation_par_mail_contact()
+	 {
+	    if($this->input->post('checkbox_value'))
+	    {
+	       $id = $this->input->post('checkbox_value');
+	       for($count = 0; $count < count($id); $count++)
+	       {
+	           
+	            $mail    = $id[$count];
+	            $website = "ubfm@gmail.com";
+
+	            $to =$id[$count];
+	            $subject = $this->input->post('sujet');
+	            $message2 = $this->input->post('message');
+	             
+
+	            $headers= "MIME Version 1.0\r\n";
+	            $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+	            $headers .= "From: no-reply@ubfm.com" . "\r\n" ."Reply-to: sumailiroger681@gmail.com"."\r\n"."X-Mailer: PHP/".phpversion();
+
+	            mail($to,$subject,$message2,$headers);
+
+	       }
+
+	       if(mail($to,$subject,$message2,$headers) > 0){
+	            echo("message envoyé avec succès");
+	       } 
+	       else {
+	            echo("Problème de connexion veillez  patienter!!!!!!!!!!!!");
+	       }
+
+
+	    }
+	 }
+
+	 function supression_information_contact_visite()
+	 {
+
+	      if($this->input->post('checkbox_value'))
+	      {
+	         $id = $this->input->post('checkbox_value');
+	         for($count = 0; $count < count($id); $count++)
+	         {
+	             
+	              $mail    = $id[$count];
+	              $this->crud_model->delete_information_contact_send($mail);
+
+	            echo("suppression avec succès");
+
+	         }
+
+	         
+
+
+	      } 
+	 }
+
+
+	 function download_photo_galery()
+	 {
+		  if($this->input->post('images'))
+		  {
+		   	$this->load->library('zip');
+		   	$images = $this->input->post('images');
+		    foreach($images as $image)
+		    {
+		    	$this->zip->read_file($image);
+		    	// echo($image);
+		    }
+		    $this->zip->download(''.time().'.zip');
+		  }
+	 }
+
+	 function upload_galery()
+	 {
+		  sleep(3);
+		  if($_FILES["files"]["name"] != '')
+		  {
+		   $output = '';
+		   $config["upload_path"] = './upload/galery/';
+		   $config["allowed_types"] = 'gif|jpg|png|webp';
+		   $this->load->library('upload', $config);
+		   $this->upload->initialize($config);
+		   for($count = 0; $count<count($_FILES["files"]["name"]); $count++)
+		   {
+		   	$extension = explode('.', $_FILES["files"]["name"][$count]);  
+	      $new_name = rand() . '.' . $extension[1];
+
+		    $_FILES["file"]["name"] = $new_name;
+		    $_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+		    $_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+		    $_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+		    $_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+
+		    // echo($_FILES["files"]["name"][$count]).'<br>';
+	      // echo($new_name).PHP_EOL;
+
+
+		    if($this->upload->do_upload('file'))
+		    {
+		     $data = $this->upload->data();
+
+		     $insert_data = array(  
+	           'image'         =>     $new_name              
+			   ); 
+		     $requete=$this->crud_model->insert_galery($insert_data);
+
+		     $output .= '
+		     <div class="col-md-3" align="center" style="margin-bottom:24px;">
+		      <img src="'.base_url().'upload/galery/'.$data["file_name"].'" class="img-thumbnail img-responsive" style="height: 200px;" />
+		      	<br />
+						<input type="checkbox" name="images[]" class="select" value="upload/galery/'.$data["file_name"].'" />
+		     </div>
+		     ';
+		    }
+		   }
+		   echo $output;   
+		  }
+	 }
+
+	   // pagination contact 
+	 function pagination_galery_member()
+	{
+
+	$this->load->library("pagination");
+	$config = array();
+	$config["base_url"] = "#";
+	$config["total_rows"] = $this->crud_model->fetch_pagination_galery();
+	$config["per_page"] = 4;
+	$config["uri_segment"] = 3;
+	$config["use_page_numbers"] = TRUE;
+	$config["full_tag_open"] = '<ul class="pagination">';
+	$config["full_tag_close"] = '</ul>';
+	$config["first_tag_open"] = '<li class="page-item">';
+	$config["first_tag_close"] = '</li>';
+	$config["last_tag_open"] = '<li class="page-item">';
+	$config["last_tag_close"] = '</li>';
+	$config['next_link'] = '<li class="page-item active"><i class="btn btn-info">&gt;&gt;</i>';
+	$config["next_tag_open"] = '<li class="page-item">';
+	$config["next_tag_close"] = '</li>';
+	$config["prev_link"] = '<li class="page-item active"><i class="btn btn-info">&lt;&lt;</i>';
+	$config["prev_tag_open"] = "<li class='page-item'>";
+	$config["prev_tag_close"] = "</li>";
+	$config["cur_tag_open"] = "<li class='page-item active'><a href='#' class='page-link'>";
+	$config["cur_tag_close"] = "</a></li>";
+	$config["num_tag_open"] = "<li class='page-item'>";
+	$config["num_tag_close"] = "</li>";
+	$config["num_links"] = 1;
+	$this->pagination->initialize($config);
+	$page = $this->uri->segment(3);
+	$start = ($page - 1) * $config["per_page"];
+
+	$output = array(
+	 'pagination_link' => $this->pagination->create_links(),
+	 'country_table'   => $this->crud_model->fetch_details_pagination_galery($config["per_page"], $start)
+	);
+	echo json_encode($output);
+	}
+	  // fin pagination
+
+	function supression_photo_galery(){
+
+	  $this->crud_model->delete_photo_galery($this->input->post("idg"));
+	  echo("suppression avec succès");
+
+	}
 
 
 
@@ -4241,6 +4605,18 @@ function fetch_single_information_contact()
                 $extension = explode('.', $_FILES['user_image']['name']);  
                 $new_name = rand() . '.' . $extension[1];  
                 $destination = './upload/service/' . $new_name;  
+                move_uploaded_file($_FILES['user_image']['tmp_name'], $destination);  
+                return $new_name;  
+           }  
+      }
+
+      function upload_image_projet()  
+      {  
+           if(isset($_FILES["user_image"]))  
+           {  
+                $extension = explode('.', $_FILES['user_image']['name']);  
+                $new_name = rand() . '.' . $extension[1];  
+                $destination = './upload/projet/' . $new_name;  
                 move_uploaded_file($_FILES['user_image']['tmp_name'], $destination);  
                 return $new_name;  
            }  

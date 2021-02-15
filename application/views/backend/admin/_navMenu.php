@@ -150,8 +150,26 @@
                                     </li>
 
                                     <li class="nk-menu-item">
-                                        <a href="<?php echo(base_url()) ?>admin/video"  class="nk-menu-link" data-original-title="Nos membres" title="Nos membres">
+                                        <a href="<?php echo(base_url()) ?>admin/video"  class="nk-menu-link" data-original-title="Nos vidéos" title="Nos vidéos">
                                             <span class="nk-menu-text"><i class="fa fa-video-camera"></i> Nos vidéos</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nk-menu-item">
+                                        <a href="<?php echo(base_url()) ?>admin/galery"  class="nk-menu-link" data-original-title="Notre galerie" title="Notre galerie">
+                                            <span class="nk-menu-text"><i class="fa fa-picture-o"></i> Notre galerie</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nk-menu-item">
+                                        <a href="<?php echo(base_url()) ?>admin/info_projet"  class="nk-menu-link" data-original-title="Nos projets" title="Nos projets">
+                                            <span class="nk-menu-text"><i class="fa fa-arrows"></i> Nos Projets</span>
+                                        </a>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li class="nk-menu-item">
+                                        <a href="<?php echo(base_url()) ?>admin/info_mini_projet"  class="nk-menu-link" data-original-title="Nos mini-projets" title="Nos mini-projets">
+                                            <span class="nk-menu-text"><i class="fa fa-backward"></i> Nos Mini-applications</span>
                                         </a>
                                     </li>
                                     
