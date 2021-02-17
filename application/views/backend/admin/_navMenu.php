@@ -175,6 +175,11 @@
                                     
                                 </ul>
                             </li>
+                             <li class="nk-menu-item">
+                                <a href="<?php echo(base_url()) ?>admin/info_picture" class="nk-menu-link" data-original-title="Nos services technologiques" title="Nos services technologiques">
+                                    <span class="nk-menu-text"><i class="fa fa-camera"></i> Images d'ilistration </span>
+                                </a>
+                            </li>
                             <!-- <li class="nk-menu-item has-sub">
                                 <a href="javascript:void(0);" class="nk-menu-link nk-menu-toggle" data-original-title="" title="">
                                     <span class="nk-menu-text">Dashboard <em class="icon ni ni-external"></em> </span>

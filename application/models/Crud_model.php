@@ -147,13 +147,23 @@ class crud_model extends CI_Model{
 
 	// opertion tinfo_projet_mini
 	var $table23 = "tinfo_projet_mini";  
-	var $select_column23 = array("idtinfo_projet_mini", "titre","montant","description","image", "created_at");  
-	var $order_column23 = array(null, "titre","description","montant","image", "created_at");
+	var $select_column23 = array("idtinfo_projet_mini","montant", "titre","description","image", "created_at");  
+	var $order_column23 = array(null, "montant","titre","description","image", "created_at");
 	// fin de la tinfo_projet_mini
+
+
+	
 
 	function fetch_pagination_online(){
 	    $query = $this->db->get("profile_online");
 	    return $query->num_rows();
+	}
+
+	function fetch_show_projets(){
+		$this->db->order_by('idtinfo_projet_mini','DESC');
+		$this->db->limit(50);
+	    $query = $this->db->get("tinfo_projet_mini");
+	    return $query;
 	}
 
 	 //insertion des photos pour la galerie
@@ -345,6 +355,12 @@ class crud_model extends CI_Model{
 	function fetch_connected($id){
 	    $this->db->where('id',$id);
 	    return $this->db->get('users')->result_array();
+	}
+
+	function fetch_data_tinfo_projet(){
+	    $this->db->limit(50);
+	    $this->db->order_by('titre','ASC');
+	    return $this->db->get('tinfo_projet');
 	}
 
 	function fetch_id_formation_by_name($nom){
@@ -3883,7 +3899,7 @@ class crud_model extends CI_Model{
 	  } 
 	// fin de script tinfo_projet
 
-	  // script pour les mini- projets du landing tinfo_projet_mini 
+	  // script pour les projets du landing tinfo_projet_mini 
 	 function make_query_tinfo_projet_mini()  
 	 {  
 	        
@@ -3893,6 +3909,7 @@ class crud_model extends CI_Model{
 	       {  
 	            $this->db->like("idtinfo_projet_mini", $_POST["search"]["value"]);  
 	            $this->db->or_like("titre", $_POST["search"]["value"]);
+	            $this->db->or_like("montant", $_POST["search"]["value"]);
 	            $this->db->or_like("description", $_POST["search"]["value"]);
 	       }  
 	       if(isset($_POST["order"]))  
@@ -3932,6 +3949,12 @@ class crud_model extends CI_Model{
 	       $this->db->insert('tinfo_projet_mini', $data);  
 	  }
 
+	  function insert_detail_galery_ok($data)  
+	  {  
+	       $this->db->insert('detail_projet', $data);  
+	  }
+
+
 	  
 	  function update_tinfo_projet_mini($idtinfo_projet_mini, $data)  
 	  {  
@@ -3953,6 +3976,8 @@ class crud_model extends CI_Model{
 	       return $query->result();  
 	  } 
 	// fin de script tinfo_projet_mini
+
+	 
 
 
 

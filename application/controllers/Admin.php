@@ -47,7 +47,15 @@ class admin extends CI_Controller
 
     function info_mini_projet(){
     	$data['title']="Information sur les projets";
+      $data['donnees'] = $this->crud_model->fetch_show_projets();
       	$this->load->view('backend/admin/landing/info_mini_projet', $data);
+    }
+    function info_picture(){
+      $data['title']="Information sur les projets";
+      $data['donnees'] = $this->crud_model->fetch_show_projets();
+      $data['projets'] = $this->crud_model->fetch_data_tinfo_projet();
+      
+        $this->load->view('backend/admin/landing/info_picture', $data);
     }
 
     function info_choix(){
@@ -4060,8 +4068,7 @@ class admin extends CI_Controller
              
               $sub_array[] = nl2br(substr($row->titre, 0,50)).' ...';
               $sub_array[] = nl2br(substr($row->description, 0,40)).' ...';
-
-              $sub_array[] = nl2br(substr($row->montant, 0,10)).' $';
+              $sub_array[] = nl2br(substr($row->montant, 0,8)).' $';
 
               $sub_array[] = nl2br(substr(date(DATE_RFC822, strtotime($row->created_at)), 0, 23)); 
              
@@ -4085,8 +4092,9 @@ class admin extends CI_Controller
          $data = $this->crud_model->fetch_single_tinfo_projet_mini($_POST["idtinfo_projet_mini"]);  
          foreach($data as $row)  
          {  
-              $output['titre']    		= $row->titre; 
+              $output['titre']    = $row->titre; 
               $output['description']    = $row->description;
+              $output['montant']    = $row->montant;
 
               if($row->image != '')  
               {  
@@ -4139,7 +4147,7 @@ class admin extends CI_Controller
            $updated_data = array(  
                'titre'            =>     $this->input->post('titre'),
                'description'      =>     $this->input->post('description'),
-               'montant'          =>     $this->input->post('montant'),
+              'montant'          =>     $this->input->post('montant'),
                'image'            =>     $this->upload_image_projet()
             );    
       }  
@@ -4165,6 +4173,9 @@ class admin extends CI_Controller
       
     }
     // fin informations tinfo_projet_mini
+
+
+
 
 
 
@@ -4510,6 +4521,25 @@ class admin extends CI_Controller
 		  }
 	 }
 
+
+   function operation_insertion_galerie(){
+
+      if($_FILES["user_image"]["size"] > 0)  
+      {  
+           $insert_data = array(  
+               'idtinfo_projet'   =>     $this->input->post('idtinfo_projet'),
+               'image'            =>     $this->upload_image_projet()
+            );    
+      }  
+      else  
+      {  
+            
+      }
+
+      $requete=$this->crud_model->insert_detail_galery_ok($insert_data);
+      echo("Ajout information avec succès");
+      
+  }
 	   // pagination contact 
 	 function pagination_galery_member()
 	{

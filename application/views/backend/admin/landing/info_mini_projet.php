@@ -34,6 +34,7 @@
 		                                          <div class="col-md-12">
 		                                             <div class="row">
 		                                               <div class="col-md-12">
+                                                    <a href="" class="btn btn-light btn-sm"><i class="fa fa-refresh"></i></a>
 		                                                 <button class="btn btn-dim btn-sm btn-outline-light pull-right  mb-4" id="add_button" data-toggle="modal" data-target="#userModal"><i class="fa fa-plus"></i>Effectuer l'opération</button>
 		                                               </div>
 		                                             </div>
@@ -57,6 +58,40 @@
 		                                                            <th width="5%">Supprimer</th>  
 		                                                        </tr>  
 		                                                   </thead> 
+
+                                                       <tbody>
+                                                         <?php
+                                                         if ($donnees->num_rows() > 0) {
+                                                          foreach ($donnees->result_array() as $key) {
+                                                           ?>
+                                                           <tr>
+                                                            
+                                                             <td><img src="<?= base_url() ?>upload/projet/<?php echo($key['image']) ?>" class="img img-thumbnail img-responsive" style="width: 50px;height: 35px; border-radius: 50%;"></td>
+                                                             <td><?php echo(substr($key['titre'], 0,40)) ?> ...</td>
+                                                            <td><?php echo(substr($key['description'], 0,40)) ?> ...</td>
+                                                            <td><?php echo(substr($key['montant'], 0,40)) ?> $</td>
+
+                                                             <td>
+                                                               <?php echo(nl2br(substr(date(DATE_RFC822, strtotime($key['created_at'])), 0, 23))) ?>
+                                                             </td>
+                                                             <td>
+                                                               <a href="javascript:void(0);" idtinfo_projet_mini="<?php echo($key['idtinfo_projet_mini']) ?>" class="btn btn-warning btn-sm update"><i class="fa fa-edit"></i></a>
+                                                             </td>
+
+                                                             <td>
+                                                               <a href="" idtinfo_projet_mini="<?php echo($key['idtinfo_projet_mini']) ?>" class="btn btn-danger btn-sm delete"><i class="fa fa-trash"></i></a>
+                                                             </td>
+
+                                                           </tr>
+                                                           <?php
+                                                          }
+                                                            # code...
+                                                         } 
+
+
+
+                                                          ?>
+                                                       </tbody>
 
 		                                                   <tfoot>  
 		                                                        <tr> 
@@ -224,25 +259,25 @@
                $('.modal-title').text("Paramètrage des informations des mini projets");  
                $('#action').val("Add");  
           })  
-          // var dataTable = $('#user_data').DataTable();
-          var dataTable = $('#user_data').DataTable({  
-               "processing":true,  
-               "serverSide":true,  
-               "order":[],  
-               "ajax":{  
-                    url:"<?php echo base_url() . 'admin/fetch_tinfo_projet_mini'; ?>",  
-                    type:"POST"  
-               },  
-               "columnDefs":[  
-                    {  
-                         "targets":[0, 0, 0],  
-                         "orderable":false,  
-                    },  
-               ],  
-          });
+          var dataTable = $('#user_data').DataTable();
+          // var dataTable = $('#user_data').DataTable({  
+          //      "processing":true,  
+          //      "serverSide":true,  
+          //      "order":[],  
+          //      "ajax":{  
+          //           url:"<?php echo base_url() . 'admin/fetch_tinfo_projet_mini'; ?>",  
+          //           type:"POST"  
+          //      },  
+          //      "columnDefs":[  
+          //           {  
+          //                "targets":[0, 0, 0],  
+          //                "orderable":false,  
+          //           },  
+          //      ],  
+          // });
 
           $(document).on('submit', '#user_form', function(event){  
-               event.preventDefault();  
+               // event.preventDefault();  
                var titre = $('#titre').val();  
                var description = $('#description').val();
                var montant = $('#montant').val();
@@ -277,7 +312,7 @@
                                 swal('succès', ''+data, 'success'); 
                                 $('#user_form')[0].reset();  
                                 $('#userModal').modal('hide');  
-                                dataTable.ajax.reload();  
+                                // dataTable.ajax.reload();  
                            }  
                       });
                         // alert("insertion");
@@ -296,7 +331,7 @@
                                   swal('succès', ''+data, 'success'); 
                                   $('#user_form')[0].reset();  
                                   $('#userModal').modal('hide');  
-                                  dataTable.ajax.reload();  
+                                  // dataTable.ajax.reload();  
                              }  
                         });
 
@@ -349,7 +384,7 @@
                       success:function(data)
                       {
                          swal("succès!", ''+data, "success");
-                         dataTable.ajax.reload();
+                         // dataTable.ajax.reload();
                       }
                     });
 	          }
