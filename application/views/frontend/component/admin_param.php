@@ -169,7 +169,7 @@
                             </li>
                             <li><a href="<?php echo(base_url()) ?>admin/dashbord"><em class="icon ni ni-activity-alt"></em><span>Actualité à la une</span></a>
                             </li>
-                            <li><a href="javascript:void(0);"><em class="icon ni ni-globe"></em><span>Visiter le site</span></a>
+                            <li><a href="<?php echo(base_url()) ?>"><em class="icon ni ni-globe"></em><span>Visiter le site</span></a>
                             </li>
                         </ul>
                     </div>

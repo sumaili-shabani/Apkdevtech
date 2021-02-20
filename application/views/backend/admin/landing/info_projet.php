@@ -131,6 +131,11 @@
 	                        </div>
 	                        <!-- fin ajout -->
 
+                          <div class="form-group col-md-12">
+                            <label for="lien"><i class="fa fa-globe"></i> Adresse du site de l'application</label>
+                            <input type="url" name="lien" id="lien" class="form-control" placeholder="http://www.nomdomaine.com">
+                          </div>
+
 	                        <div class="form-group col-md-12">
                               <label><i class="fa fa-camera"></i> Selectionner l'image de projet</label>
                               <input type="file" name="user_image" id="user_image" class="form-control" />
@@ -237,6 +242,7 @@
           $(document).on('submit', '#user_form', function(event){  
                event.preventDefault();  
                var titre = $('#titre').val();  
+               var lien = $('#lien').val();  
                var description = $('#description').val();
                var extension 	= $('#user_image').val().split('.').pop().toLowerCase(); 
                
@@ -316,6 +322,7 @@
                     {  
                          $('#userModal').modal('show');  
                          $('#titre').val(data.titre);
+                         $('#lien').val(data.lien);
                          $('#description').val(data.description);
 
                          $('#user_uploaded_image').html(data.user_image);

@@ -16,7 +16,7 @@
                     </span>
                 </a>
             </div><!-- .nk-header-brand -->
-            <div class="nk-header-menu" data-content="headerNav">
+            <div class="nk-header-menu" data-content="headerNav" style="background-color: rgb(41, 52, 122);">
                 <div class="nk-header-mobile">
                     <div class="nk-header-brand">
                         <a href="<?= base_url() ?>" class="logo-link">
@@ -84,26 +84,26 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="javascrit:void(0);" class="nk-menu-link">
-                                    <span class="nk-menu-text"><em class="icon ni ni-clipboad-check-fill"></em>&nbsp;Nos projet</span>
+                                <a href="<?php echo(base_url()) ?>home/projets" class="nk-menu-link">
+                                    <span class="nk-menu-text"><em class="icon ni ni-clipboad-check-fill"></em>&nbsp;Nos projets</span>
                                 </a>
                             </li>
 
                             <li class="nk-menu-item">
-                                <a href="javascrit:void(0);" class="nk-menu-link">
+                                <a href="<?php echo(base_url()) ?>home/galery" class="nk-menu-link">
                                     <span class="nk-menu-text"><em class="icon ni ni-camera-fill"></em>&nbsp;Notre galerie</span>
                                 </a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="javascrit:void(0);" class="nk-menu-link">
+                                <a href="<?php echo(base_url()) ?>home/video" class="nk-menu-link">
                                     <span class="nk-menu-text"><em class="icon ni ni-video-fill"></em>&nbsp;Nos vidéo</span>
                                 </a>
                             </li>
-                            <li class="nk-menu-item">
+                            <!-- <li class="nk-menu-item">
                                 <a href="javascrit:void(0);" class="nk-menu-link">
                                     <span class="nk-menu-text"><em class="icon ni ni-book-read"></em>&nbsp;Nos cours</span>
                                 </a>
-                            </li>
+                            </li> -->
                             
                             
                         </ul>

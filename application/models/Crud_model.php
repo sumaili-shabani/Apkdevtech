@@ -141,8 +141,8 @@ class crud_model extends CI_Model{
 
 	// opertion tinfo_projet
 	var $table22 = "tinfo_projet";  
-	var $select_column22 = array("idtinfo_projet", "titre","description","image", "created_at");  
-	var $order_column22 = array(null, "titre","description","image", "created_at");
+	var $select_column22 = array("idtinfo_projet", "lien","titre","description","image", "created_at");  
+	var $order_column22 = array(null, "lien","titre","description","image", "created_at");
 	// fin de la tinfo_projet
 
 	// opertion tinfo_projet_mini
@@ -4039,6 +4039,27 @@ class crud_model extends CI_Model{
       return $query->num_rows();
    }
 
+    // debit script projets 
+   function fetch_pagination_project()
+   {
+      $query = $this->db->query("SELECT * FROM tinfo_projet");
+      return $query->num_rows();
+   }
+
+    // debit script galery 
+   function fetch_pagination_galeries()
+   {
+      $query = $this->db->query("SELECT * FROM galery");
+      return $query->num_rows();
+   }
+
+    // debit script video 
+   function fetch_pagination_videos()
+   {
+      $query = $this->db->query("SELECT * FROM video");
+      return $query->num_rows();
+   }
+
    // detail de script services
    function fetch_details_pagination_offres($limit, $start)
    {
@@ -4088,6 +4109,252 @@ class crud_model extends CI_Model{
    }
 
    // fin script appel des services
+
+   // detail de script services de la page
+   function fetch_pagination_services_page($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("tinfo_service");
+    $this->db->order_by("titre", "ASC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+    $today = date('Y-m-d');
+    $status = '';
+
+    foreach($query->result() as $key)
+    {
+
+      
+     $output .= '
+
+        <div class="col-md-12 mb-2">
+
+        	<div class="card card-bordered">
+                <div class="card-inner card-inner-lg">
+                    <div class="align-center flex-wrap flex-md-nowrap g-4">
+                        <div class="nk-block-image w-120px flex-shrink-0">
+
+                           <img src="'.base_url().'upload/service/'.$key->image.'" class="img img-fluid">
+                           
+                        </div>
+                        <div class="nk-block-content">
+                            <div class="nk-block-content-head px-lg-4">
+                            	<h5>'.$key->titre.'</h5>
+                                <p class="text-soft"> '.$key->description.'</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+      
+     ';
+    }
+    
+    return $output;
+   }
+
+   // recherche de projets
+   function fetch_data_search_projects($query)
+   {
+    $this->db->select("*");
+    $this->db->from("tinfo_projet");
+    $this->db->limit(8);
+    if($query != '')
+    {
+     $this->db->like('titre', $query);
+     $this->db->or_like('description', $query);
+
+    }
+    $this->db->order_by('titre', 'ASC');
+    return $this->db->get();
+   }
+
+   // recherche de videos
+   function fetch_data_search_videos($query)
+   {
+    $this->db->select("*");
+    $this->db->from("video");
+    $this->db->limit(8);
+    if($query != '')
+    {
+     $this->db->like('nom', $query);
+     $this->db->or_like('description', $query);
+
+    }
+    $this->db->order_by('nom', 'ASC');
+    return $this->db->get();
+   }
+
+   // detail de script projets de la page
+   function fetch_pagination_projects_page($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("tinfo_projet");
+    $this->db->order_by("titre", "ASC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+    $today = date('Y-m-d');
+    $status = '';
+
+    foreach($query->result() as $key)
+    {
+
+    	if ($key->lien !='') {
+			$url_site ='
+			<a target="_blank" href="'.$key->lien.'" class="btn btn-outline-info">
+	    		<i class="fa fa-globe"></i> &nbsp;
+	    	visiter le site</a>';
+		}
+		else
+		{
+			$url_site ='';
+		}
+
+      
+     $output .= '
+
+        <div class="col-md-12 mb-2">
+
+        	<div class="card card-bordered">
+
+        		<div class="card-header text-center" style="background-color: rgb(41, 52, 122);">
+        			<h5 class="text-white">'.$key->titre.'</h5>
+        			
+        		</div>
+
+                <div class="card-inner card-inner-lg bg-lighter">
+                    <div class="align-center flex-wrap flex-md-nowrap g-4">
+                        <div class="nk-block-image w-120px flex-shrink-0">
+
+                           <img src="'.base_url().'upload/projet/'.$key->image.'" class="img img-fluid">
+                           
+                        </div>
+                        <div class="nk-block-content">
+                            <div class="nk-block-content-head px-lg-4">
+                            	
+                                <p class="text-soft">'.nl2br(substr($key->description, 0,450)).'  ... &nbsp;&nbsp;
+                                	'.$url_site.'
+                                </p>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card-header text-center" style="background-color: rgb(41, 52, 122);">
+        			<p class="sub-text ">
+                    	<a href="'.base_url().'home/projet/'.$key->idtinfo_projet.'" class="btn btn-primary btn-sm">
+                    		<i class="fa fa-eye"></i>&nbsp; Voir le détail
+                    	</a>
+                    </p>
+
+        		</div>
+
+            </div>
+           
+        </div>
+
+     ';
+
+    }
+    
+    return $output;
+   }
+   // fin script projet de la page
+
+   // detail de script galery de la page
+   function fetch_pagination_galery_page($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("galery");
+    $this->db->order_by("created_at", "DESC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+    $today = date('Y-m-d');
+    $status = '';
+
+    foreach($query->result() as $key)
+    {
+
+    	
+     $output .= '
+     <div class="col-md-6 mb-2">
+        <a download="'.base_url().'upload/galery/'.$key->image.'" href="'.base_url().'upload/galery/'.$key->image.'">
+            <img src="'.base_url().'upload/galery/'.$key->image.'" alt="" style="height: 190px; width: 100%;">
+            <em class="icon ni ni-download"></em>
+
+        </a>
+    </div>
+
+     ';
+
+    }
+    
+    return $output;
+   }
+   // fin script galery de la page
+
+   // detail de script videos de la page
+   function fetch_pagination_videos_page($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("video");
+    $this->db->order_by("created_at", "DESC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+    $today = date('Y-m-d');
+    $status = '';
+
+
+    foreach($query->result() as $key)
+    {
+
+    	
+     $output .= '
+     
+    <div class="col-md-6 mb-2 p-2">
+		<div class="row">
+			
+			<div class="col-md-12">
+				<div class="embed-responsive embed-responsive-16by9">
+				  	<iframe class="embed-responsive-item" src="'.$key->lien.'" allowfullscreen></iframe>
+				</div>
+
+				<div class="card-title">
+					<strong>'.$key->nom.'</strong>
+					
+				</div>
+				<div class="card-text">
+					<p>
+					'.nl2br(substr($key->description, 0,500)).' ...
+					
+				</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+     ';
+
+    }
+    
+    return $output;
+   }
+   // fin script videos de la page
+
 
 	 
 

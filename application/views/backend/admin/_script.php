@@ -56,7 +56,7 @@
          setTimeout(function(){
              $('#load_data').append('');
              $('#load_data_message').html("");
-          }, 1000);
+          }, 500);
 
 
     });

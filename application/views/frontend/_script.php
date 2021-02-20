@@ -8,8 +8,11 @@
 <script type="text/javascript" src="<?= base_url('js/sweetalert/sweetalert.js')?>"></script>
 <script type="text/javascript" src="<?= base_url('js/bootstrap-select-1.13.9/dist/js/bootstrap-select.min.js')?>"></script>
 <!-- Javascript -->
+<!-- popup js -->
+<script type="text/javascript" src="<?= base_url('js/sweetalert/sweetalert.js')?>"></script>
+<!-- fin -->
 
-<script src="<?= base_url('js/plugins/summernote/summernote-bs4.min.js')?>"></script>
+<script src="<?= base_url('js/js/popup.js')?>"></script>
 <script>
   $(function () {
     // Summernote

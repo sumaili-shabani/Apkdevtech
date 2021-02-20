@@ -71,7 +71,7 @@
 
  ?>
 <!-- insertion de navmeniu -->
-<div class="nk-header nk-header-fixed is-light">
+<div class="nk-header nk-header-fluid is-theme">
     <div class="container-xl wide-lg">
         <div class="nk-header-wrap">
             <div class="nk-menu-trigger mr-sm-2 d-lg-none">
@@ -87,7 +87,7 @@
                 </a>
             </div>
             <!-- .nk-header-brand -->
-            <div class="nk-header-menu mobile-menu" data-content="headerNav">
+            <div class="nk-header-menu mobile-menu" data-content="headerNav" style="background-color: rgb(41, 52, 122);">
                 <div class="nk-header-mobile">
                     <div class="nk-header-brand">
                         <a href="javascript:void(0);" class="logo-link">
@@ -617,7 +617,7 @@
                                     </li>
                                     <li><a href="<?php echo(base_url()) ?>admin/dashbord"><em class="icon ni ni-activity-alt"></em><span>Actualité à la une</span></a>
                                     </li>
-                                    <li><a href="javascript:void(0);"><em class="icon ni ni-globe"></em><span>Visiter le site</span></a>
+                                    <li><a href="<?php echo(base_url()) ?>"><em class="icon ni ni-globe"></em><span>Visiter le site</span></a>
                                     </li>
                                 </ul>
                             </div>

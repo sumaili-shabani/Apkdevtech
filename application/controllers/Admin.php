@@ -3979,6 +3979,7 @@ class admin extends CI_Controller
          foreach($data as $row)  
          {  
               $output['titre']    = $row->titre; 
+              $output['lien']    = $row->lien;
               $output['description']    = $row->description;
 
               if($row->image != '')  
@@ -4002,6 +4003,7 @@ class admin extends CI_Controller
       {  
            $insert_data = array(  
                'titre'            =>     $this->input->post('titre'),
+               'lien'             =>     $this->input->post('lien'),
                'description'      =>     $this->input->post('description'),
                'image'            =>     $this->upload_image_projet()
             );    
@@ -4011,6 +4013,7 @@ class admin extends CI_Controller
              $user_image = "icone-user.jpg";  
              $insert_data = array(  
                    'titre'            =>     $this->input->post('titre'),
+                   'lien'             =>     $this->input->post('lien'),
                    'description'      =>     $this->input->post('description'),
                    'image'            =>     $user_image
             );  
@@ -4029,6 +4032,7 @@ class admin extends CI_Controller
       {  
            $updated_data = array(  
                'titre'            =>     $this->input->post('titre'),
+               'lien'             =>     $this->input->post('lien'),
                'description'      =>     $this->input->post('description'),
                'image'            =>     $this->upload_image_projet()
             );    
@@ -4037,6 +4041,7 @@ class admin extends CI_Controller
       {    
              $updated_data = array(  
                    'titre'            =>     $this->input->post('titre'),
+                   'lien'             =>     $this->input->post('lien'),
                    'description'      =>     $this->input->post('description')
             );  
       }

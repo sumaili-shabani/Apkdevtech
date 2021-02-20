@@ -1,5 +1,5 @@
 <div class="nk-msg-aside bg-white">
-    <div class="nk-msg-nav">
+    <div class="nk-msg-nav bg-white">
         <ul class="nk-msg-menu bg-white">
             <li class="nk-msg-menu-item active"><a href="">Actif</a></li>
 
