@@ -153,6 +153,10 @@ class crud_model extends CI_Model{
 
 
 	
+	function Select_articles_tinfo_personnel()
+	{
+	      return $this->db->query('SELECT * FROM tinfo_personnel ORDER BY created_at DESC LIMIT 10');
+	}
 
 	function fetch_pagination_online(){
 	    $query = $this->db->get("profile_online");
@@ -170,6 +174,12 @@ class crud_model extends CI_Model{
 	function insert_galery($data)  
 	{  
 	    $this->db->insert('galery', $data);  
+	}
+
+	// contact 
+	function insert_contact($data)  
+	{  
+	    $this->db->insert('contact', $data);  
 	}
 	//suppression des photos pour la galerie
 	function delete_photo_galery($idg)  
@@ -3975,7 +3985,109 @@ class crud_model extends CI_Model{
 	       $query=$this->db->get('tinfo_projet_mini');  
 	       return $query->result();  
 	  } 
-	// fin de script tinfo_projet_mini
+	  // fin de script tinfo_projet_mini
+
+	  /*
+	  script pour la partie front-end
+	  et la visualisation des elements
+	  du cote visiteur
+	  ========================================
+	  ========================================
+	  *****************************************
+	  ===========================================
+
+	  */
+
+	function Select_contact_info_site()
+    {
+      	return $this->db->query('SELECT * FROM tbl_info  LIMIT 1');
+    }
+    //famille
+    function Select_contact_membre()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_user  LIMIT 6');
+    }
+
+    //projets
+    function Select_contact_projets_cool()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_projet ORDER BY titre ASC  LIMIT 10');
+    }
+
+    //service technlogique
+    function Select_contact_service_techno()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_techno  LIMIT 10');
+    }
+
+    //votre choix
+    function Select_contact_tinfo_choix()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_choix  LIMIT 10');
+    }
+
+    // service
+    function Select_contact_service()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_service ORDER BY titre ASC  LIMIT 6');
+    }
+
+    // debit script services 
+   function fetch_pagination_services()
+   {
+      $query = $this->db->query("SELECT * FROM tinfo_service");
+      return $query->num_rows();
+   }
+
+   // detail de script services
+   function fetch_details_pagination_offres($limit, $start)
+   {
+    $output = '';
+    $this->db->select("*");
+    $this->db->from("tinfo_service");
+    $this->db->order_by("titre", "ASC");
+    $this->db->limit($limit, $start);
+    $query = $this->db->get();
+
+    $today = date('Y-m-d');
+    $status = '';
+
+    foreach($query->result() as $key)
+    {
+
+      
+     $output .= '
+
+        <div class="col-md-6 mb-2">
+
+        	<div class="card card-bordered">
+                <div class="card-inner card-inner-lg">
+                    <div class="align-center flex-wrap flex-md-nowrap g-4">
+                        <div class="nk-block-image w-120px flex-shrink-0">
+
+                           <img src="'.base_url().'upload/service/'.$key->image.'" class="img img-fluid">
+                           
+                        </div>
+                        <div class="nk-block-content">
+                            <div class="nk-block-content-head px-lg-4" style="height: 260px;">
+                            	<h5>'.$key->titre.'</h5>
+                                <p class="text-soft"> '.$key->description.'</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+      
+     ';
+    }
+    
+    return $output;
+   }
+
+   // fin script appel des services
 
 	 
 

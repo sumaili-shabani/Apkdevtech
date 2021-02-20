@@ -1,0 +1,4 @@
+SELECT DATE_ADD(now(), INTERVAL 30 DaY) AS jours
+==================================================
+
+SELECT DATEDIFF('2021-04-12', '2021-03-12') AS jours

@@ -4396,6 +4396,11 @@ class admin extends CI_Controller
 	            $output['email'] = $row->email; 
 	            $output['message'] = $row->message; 
 
+              // $output['message'] = '
+              // <textarea name="message" id="message"  class="form-control form-control-lg no-resize" placeholder="Taper votre message">'.$row->message.'</textarea>
+              // '; 
+
+
 	       }  
 	       echo json_encode($output);  
 	  } 

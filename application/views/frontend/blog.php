@@ -1,140 +1,124 @@
-<?php 
+<!DOCTYPE html>
+<html lang="fr" class="js">
 
-$nom_site;
-$icone;
-$tel1;
-$tel2;
-$adresse;
-$facebook;
-$twitter;
-$linkedin;
-$email;
-$termes;
-$confidentialite;
+<head>
+    <?php include('_meta.php') ?>
+    <style type="text/css">
+    	.my_footer_text{
+    		color: rgb(181, 216, 242);
+    	}
+    </style>
+</head>
 
+<body class="nk-body npc-invest bg-white">
+    <div class="nk-app-root">
+        <!-- wrap @s -->
+        <div class="nk-wrap ">
+            <!-- main header @s -->
+            <?php include('_navMenu.php'); ?>
+            <!-- main header @e -->
+            <!-- content @s -->
+            <div class="nk-content nk-content-lg nk-content-fluid">
+                <div class="container-xl wide-lg">
+                    <div class="nk-content-inner">
+                        <div class="nk-content-body">
 
+                        	<!-- mes scripts commencent -->
+                            	<div class="col-md-12">
+                            		<div class="row">
+                            			<!-- bloc info -->
+                            			<div class="col-md-8 mb-2">
+                            				<div class="col-md-12">
+                            					<div class="row">
+                            						<div class="col-md-4">
+                            							<div class="col-md-12">
+                            								<div class="row">
+                            									<!-- photo -->
+                            									<div class="col-md-12 mb-2">
+                            										<img src="<?php echo(base_url()) ?>upload/carousel/logo 5.jpg" class="img-responsive img-thumbnail">
+                            									</div>
+                            									<!-- fin photo -->
 
-$this->db->limit(1);
-$query = $this->db->get("tbl_info");
-if ($query->num_rows() > 0) {
-	foreach ($query->result_array() as $key) {
-		$nom_site = $key['nom_site'];
-		$icone = $key['icone'];
-		$tel1 = $key['tel1'];
-		$tel2 = $key['tel2'];
-		$adresse = $key['adresse'];
-		$facebook = $key['facebook'];
-		$twitter = $key['twitter'];
-		$linkedin = $key['linkedin'];
-		$email = $key['email'];
-		$termes = $key['termes'];
-		$confidentialite = $key['confidentialite'];
+                            									<!-- photo -->
+                            									<div class="col-md-12 mb-2">
+                            										<img src="<?php echo(base_url()) ?>upload/carousel/logo 4.jpg" class="img-responsive img-thumbnail">
+                            									</div>
+                            									<!-- fin photo -->
 
-	}
-	# code...
-}
+                            								</div>
+                            							</div>
+                            						</div>
 
+                            						<div class="col-md-8">
 
- ?>
-<!doctype html>
-<html lang="en">
-  <head>
-   <?php include('_meta.php') ?>
-  </head>
-  <body>
+                            							<div class="col-md-12 mb-2">
+                            								<div class="nk-block-head-content text-center">
+				                                                <h4 class="nk-block-title fw-normal">Qui sommes-nous au juste?</h4>
+				                                                <div class="nk-block-des">
+				                                                    <p>
+				                                                    	<ul class="list list-lg list-checked-circle list-success">
+				                                                    		<li>
+				                                                    			Il est hélas devenu évident aujourd'hui que notre technologie a dépassé notre humanité.
+				                                                    		</li>
+				                                                    		<li>
+				                                                    			Ne te sers pas de la technologie comme d’un substitut à la chaleur humaine.
+				                                                    		</li>
+				                                                    	</ul>
+				                                                    </p>
+				                                                </div>
+				                                            </div>
+                            							</div>
+                            							<div class="col-md-12 mb-2">
+                            								<?php echo(nl2br($blog_info)) ?>
+                            							</div>
 
-  	<?php include('_nav.php') ?>
-
-  	<div class="container col-md-12">
-  		<div class="row">
-
-
-  			<div class="col-md-1">
-  					
-			</div>
-			<div class="col-md-10">
-				
-
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-12" style="margin-top: 10px;">
-
-						<!-- les scripts commencent -->
-						<div class="row">
-							<div class="col-md-1"></div>
-							<div class="col-md-10">
-								<div class="col-md-12">
-									<div class="row">
-										<div class="col-md-6">
-											<?php 
-											echo(nl2br($termes));
-											 ?>
-										</div>
-
-										<div class="col-md-6">
-
-
-											<ul class="contact-info list-unstyled">
-								                <li class="mb-4"><i class="fa fa-map"></i><span>&nbsp; Addresse:</span>
-								                  <p><?php echo($adresse) ?></p>
-								                </li>
-								                <li class="mb-4"><i class="fa fa-google"></i><span>&nbsp; Email</span><a href="mailto:themeht23@gmail.com"> <?php echo($email) ?></a>
-								                </li>
-								                <li class="mb-4"><i class="fa fa-phone"></i><span>&nbsp; Téléphone principal:</span><a href="tel:<?php echo($tel2) ?>"><?php echo($tel2) ?></a>
-								                </li>
-								                <li><i class="fa fa-phone"></i><span>&nbsp; Téléphone:</span><a href="tel:<?php echo($tel1) ?>"><?php echo($tel1) ?></a>
-								                </li>
-								            </ul>
-								            
-
-								            <div class="col-md-12">
-
-								            	<div class="embed-responsive embed-responsive-21by9" style="height: 260px;">
-												  <iframe src="https://www.google.com/maps/d/embed?mid=1v011yCT8HiVU6h5gmwvLtbs_5iobmB8r" width="640" height="480"></iframe>
-												</div>
-								            	
-								            </div>
-											
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-md-1"></div>
-						</div>
-
-						<!-- fin de mes scripts -->
-						
-					</div>
-				</div>
-			</div>
+                            						</div>
 
 
-			</div>
-			<div class="col-md-1">
-				
-			</div>
-  			
-  		</div>
-  	</div>
-
-  
-
-  	
-  	<?php include("_script.php") ?>
-
-  	<script type="text/javascript">
-  		$(document).ready(function(){
-  			//alert("boom");
-  		});
-  	</script>
-
-  	
+                            					</div>
+                            				</div>
+                            			</div>
+                            			<!-- fin bloc info -->
+                            			<!-- bloc media -->
+                            			<div class="col-md-4 mb-2">
+                            				<!-- facebook -->
+							               	<div class="col-md-12 mb-2 card bg-lighter">
+							               		<div class="row card-body">
+							               			<div class="col-md-12 embed-responsive">
+							               				<div id="fb-root"></div>
+														<div id="fb-root"></div>
+														<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v9.0&appId=301499887887474&autoLogAppEvents=1" nonce="iBh9kL9E"></script>
 
 
+														<div class="fb-page" data-href="https://web.facebook.com/D%C3%A9veloppeurs-des-technologies-114107447382924" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://web.facebook.com/D%C3%A9veloppeurs-des-technologies-114107447382924" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/D%C3%A9veloppeurs-des-technologies-114107447382924">Développeurs des technologies</a></blockquote></div>
+							               			</div>
+							               		</div>
+							               	</div>
+							               	<!-- fin bloc facebook -->
+                            			</div>
+                            			<!-- fin bloc media -->
 
+                            			<!-- bloc attantes -->
+		                                <?php include('component/comprendre.php') ?>
+		                                <!-- fin bloc -->
 
+                            		</div>
+                            	</div>		
+                            <!-- fin de mes scripts -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content @e -->
+            <!-- footer @s -->
+           <?php include('_footer.php') ?>
+            <!-- footer @e -->
+        </div>
+        <!-- wrap @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    <?php include('_script.php') ?>
+</body>
 
-
-  </body>
 </html>

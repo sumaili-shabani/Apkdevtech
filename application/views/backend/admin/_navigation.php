@@ -37,7 +37,7 @@
 
  ?>
 <!-- main @s -->
-<div class="nk-apps-sidebar is-dark">
+<div class="nk-apps-sidebar" style="background-color: rgb(41, 52, 122);">
     <div class="nk-apps-brand">
         <a href="javascript:void(0);" class="logo-link">
             <img class="logo-light logo-img" src="<?= base_url('js/images/logo-small.png')?>" srcset="<?= base_url('js/images/logo-small2x.png 2x')?>" alt="logo">
@@ -104,7 +104,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="nk-sidebar-footer">
+                <div class="nk-sidebar-footer" style="background-color: rgb(41, 52, 122);">
                     <ul class="nk-menu nk-menu-md">
                         <li class="nk-menu-item">
                             <a href="javascript:void(0);" class="nk-menu-link" title="Settings">
@@ -114,7 +114,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="nk-sidebar-profile nk-sidebar-profile-fixed dropdown">
+            <div class="nk-sidebar-profile nk-sidebar-profile-fixed dropdown" style="background-color: rgb(41, 52, 122);">
                 <a href="javascript:void(0);" data-toggle="dropdown" data-offset="50,-60">
                     <div class="user-avatar">
                         <span>Admi</span>

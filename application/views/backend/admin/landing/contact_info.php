@@ -103,18 +103,24 @@
 			                                <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="<?php echo($this->lang->line("menu_email")) ?> ">
 			                            </div>
 			                        </div>
+			                        <div class="col-md-12 card-bordered">
+			                        	<div class="card-body">
+			                        		<div class="col-md-12 cool_message">
+			                        			
+			                        		</div>
+			                        	</div>
+			                        	
+			                        </div>
 
-			                        <div class="form-group">
+			                        <!-- <div class="form-group">
 			                            
 			                            <div class="form-control-wrap">
-			                                <div class="form-editor-custom">
+			                                <div class="form-editor-custom cool_message">
 			                                    <textarea name="message" id="message"  class="form-control form-control-lg no-resize" placeholder="<?php echo($this->lang->line("menu_message")) ?>"></textarea>
-			                                    <div class="form-editor-action">
-			                                        <a class="link collapsed" data-toggle="collapse" href="#filedown" aria-expanded="false"><em class="icon ni ni-clip"></em> <?php echo($this->lang->line("menu_attach")) ?></a>
-			                                    </div>
+			                                   
 			                                </div>
 			                            </div>
-			                        </div>
+			                        </div> -->
 			                    </div><!-- .col -->
 			                    
 			                   
@@ -208,8 +214,9 @@
 	                     $('#name').val(data.nom);
 	                     $('#subject').val(data.sujet);
 	                     $('#email').val(data.email);
-	                     $('#message').val(data.message);
-	                     
+	                     // $('#message').val(data.message);
+	                     $('.cool_message').html(data.message);
+
 	                }  
 	           });  
 	      });
