@@ -70,8 +70,6 @@
 							                         			<div class="col-md-6">
 							                         				<button type="submit" name="download" class="btn btn-primary"> <i class="fa fa-save fa-lg"></i> &nbsp; Télécharger</button>&nbsp;
 
-
-															   		<button type="button" name="delete" id="delete" class="btn btn-danger delete_all"> <i class="fa fa-trash fa-lg"></i> &nbsp; Supprimer</button>
 							                         			</div>
 							                         			<div class="col-md-3"></div>
 															   
@@ -196,19 +194,6 @@
         $(document).ready(function(){
             //alert("boom");
 
-            $("#projet_ok").on("change", function(t) {
-
-	            var idtinfo_projet = $(this).val();
-	            if (idtinfo_projet !='') {
-	                $('#idtinfo_projet').val(idtinfo_projet);
-	            }
-	            else{
-
-	                 $('#idtinfo_projet').val("");                
-	                swal("Ouf!!!", "Veillez complèter le projet 😰", "error"); 
-	            }
-	        });
-
              $(document).on('submit', '#user_form', function(event){  
                event.preventDefault();  
                var idtinfo_projet = $('#idtinfo_projet').val();  
@@ -244,7 +229,7 @@
                                 swal('succès', ''+data, 'success'); 
                                 $('#user_form')[0].reset();  
                                 $('#userModal').modal('hide');  
-                                // dataTable.ajax.reload();  
+                                 load_country_data(1);  
                            }  
                       });
                         // alert("insertion");
@@ -270,7 +255,7 @@
          function load_country_data(page)
 		 {
 		  $.ajax({
-		   url:"<?php echo base_url(); ?>admin/pagination_galery_member/"+page,
+		   url:"<?php echo base_url(); ?>admin/pagination_galery_picture/"+page,
 		   method:"GET",
 		   dataType:"json",
 		    beforeSend:function()
@@ -293,36 +278,26 @@
 		  load_country_data(page);
 		 });
 
-		//  $('.checkbox_id').click(function(){
-		// 	  if($(this).is(':checked'))
-		// 	  {
-			  	
-		// 	  }
-		// 	  else
-		// 	  {
-		// 	  }
-		// });
-
+		
 
 		 $(document).on('click', '.supprimer', function(e){
 		 	e.preventDefault();
-	           var idg = $(this).attr('idg');
+	           var idd = $(this).attr('idd');
 
 				  if(confirm("Etes-vous sûre de vouloir le supprimer?"))
 		          {
 		            
-			          if(idg !='')
+			          if(idd !='')
 		              {
-		                 // alert("idg:"+idg);
+		                 // alert("idd:"+idd);
 						  $.ajax({
-				              url:"<?php echo base_url(); ?>admin/supression_photo_galery",
+				              url:"<?php echo base_url(); ?>admin/supression_photo_picture",
 				              method:"POST",
-				              data:{idg:idg},
+				              data:{idd:idd},
 				              success:function(data)
 				              {
 				                 Swal.fire("succès!!!👌", ''+data, "success");
 				                 load_country_data(1);
-				                 // dataTable.ajax.reload();
 				              }
 				          });
 		              }
@@ -341,11 +316,24 @@
 	          	
 	      });
 
+         $("#projet_ok").on("change", function(t) {
 
+            var idtinfo_projet = $(this).val();
+            if (idtinfo_projet !='') {
+                $('#idtinfo_projet').val(idtinfo_projet);
+            }
+            else{
 
-
-
+                $('#idtinfo_projet').val("");                
+                swal("Ouf!!!", "Veillez complèter le projet 😰", "error"); 
+            }
         });
+
+
+
+
+
+    });
     </script>
 
     <script type="text/javascript">

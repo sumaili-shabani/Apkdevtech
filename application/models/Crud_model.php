@@ -187,6 +187,13 @@ class crud_model extends CI_Model{
          $this->db->where("idg", $idg);  
          $this->db->delete("galery");  
     }
+
+    //suppression des photos pour la projet d'ulistration
+	function delete_photo_picture($idd)  
+    {  
+         $this->db->where("idd", $idd);  
+         $this->db->delete("detail_projet");  
+    }
 	  // recherche des produits par fultres
     function fetch_data_search_online_user($query)
     {
@@ -3668,6 +3675,13 @@ class crud_model extends CI_Model{
       return $query->num_rows();
     }
 
+    // pagination picture
+    function fetch_pagination_picture(){
+      $this->db->order_by("idd", "DESC");
+      $query = $this->db->get("detail_projet");
+      return $query->num_rows();
+    }
+
     // pagination message utulisateur
       function fetch_details_pagination_contact_message_auditeur($limit, $start){
           $output = '';
@@ -3796,6 +3810,37 @@ class crud_model extends CI_Model{
 	      	<br />
 			<input type="checkbox" name="images[]" idg="'.$row->idg.'" class="select checkbox_id image_galery" value="upload/galery/'.$row->image.'" /> &nbsp;
 			<a href="javascript:void(0);" class="text-danger supprimer" idg="'.$row->idg.'">
+				<i class="fa fa-trash"></i> supprimer
+			</a>
+	     </div>
+         ';
+        }
+        
+        return $output;
+      }
+      // fin pagination
+
+      // pagination picture des projet
+      function fetch_details_pagination_picture($limit, $start){
+          $output = '';
+        $this->db->select("*");
+        $this->db->from("detail_projet");
+        // $this->db->order_by("nom", "ASC");
+        $this->db->order_by("idd", "DESC");
+
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        
+        foreach($query->result() as $row)
+        {
+          
+         $output .= '
+
+        <div class="col-md-3" align="center" style="margin-bottom:24px;">
+	      <img src="'.base_url().'upload/projet/'.$row->image.'" class="img-thumbnail img-responsive" style="height: 200px;" />
+	      	<br />
+			<input type="checkbox" name="images[]" idd="'.$row->idd.'" class="select checkbox_id image_galery" value="upload/projet/'.$row->image.'" /> &nbsp;
+			<a href="javascript:void(0);" class="text-danger supprimer" idd="'.$row->idd.'">
 				<i class="fa fa-trash"></i> supprimer
 			</a>
 	     </div>
@@ -4014,6 +4059,16 @@ class crud_model extends CI_Model{
       	return $this->db->query('SELECT * FROM tinfo_projet ORDER BY titre ASC  LIMIT 10');
     }
 
+    //projets
+    function Select_contact_projets_detail($idtinfo_projet)
+    {
+    	$this->db->limit(1);
+    	return $this->db->get_where("tinfo_projet", array(
+    		'idtinfo_projet'	=>	$idtinfo_projet
+    	));
+      	
+    }
+
     //service technlogique
     function Select_contact_service_techno()
     {
@@ -4024,6 +4079,12 @@ class crud_model extends CI_Model{
     function Select_contact_tinfo_choix()
     {
       	return $this->db->query('SELECT * FROM tinfo_choix  LIMIT 10');
+    }
+
+    //minis projets
+    function Select_contact_tinfo_projet_mini()
+    {
+      	return $this->db->query('SELECT * FROM tinfo_projet_mini ORDER BY created_at DESC  LIMIT 6');
     }
 
     // service

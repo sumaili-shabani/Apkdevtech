@@ -1,87 +1,56 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
+
+$base_url = 'http://localhost/apkdevtech/';
+
+?>
+
+<!DOCTYPE html>
+<html lang="zxx" class="js">
+
 <head>
-	<meta charset="utf-8">
-	<title>404 Page Not Found</title>
-	<style type="text/css">
 
-	::selection { background-color: #f07746; color: #fff; }
-	::-moz-selection { background-color: #f07746; color: #fff; }
-
-	body {
-		background-color: #fff;
-		margin: 40px auto;
-		max-width: 1024px;
-		font: 16px/24px normal "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: #808080;
-	}
-
-	a {
-		color: #dd4814;
-		background-color: transparent;
-		font-weight: normal;
-		text-decoration: none;
-	}
-
-	a:hover {
-		color: #97310e;
-	}
-
-	h1 {
-		color: #fff;
-		background-color: #dd4814;
-		border-bottom: 1px solid #d0d0d0;
-		font-size: 22px;
-		font-weight: bold;
-		margin: 0 0 14px 0;
-		padding: 5px 15px;
-		line-height: 40px;
-	}
-
-	h2 {
-		color:#404040;
-		margin:0;
-		padding:0 0 10px 0;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 13px;
-		background-color: #f5f5f5;
-		border: 1px solid #e3e3e3;
-		border-radius: 4px;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #d0d0d0;
-		box-shadow: 0 0 8px #d0d0d0;
-		border-radius: 4px;
-	}
-
-	p {
-		margin: 0 0 10px;
-		padding:0;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-		min-height: 96px;
-	}
-	</style>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="@@page-discription">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="<?php echo($base_url) ?>js/images/socials/medium.png">
+    <!-- Page Title  -->
+    <title><?php echo $heading; ?></title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="<?php echo($base_url) ?>js/assets/css/dashlite.css?ver=1.4.0">
+    <link id="skin-default" rel="stylesheet" href="<?php echo($base_url) ?>js/assets/css/theme.css?ver=1.4.0">
 </head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<div id="body">
-			<?php echo $message; ?>
-		</div>
-	</div>
-</body>
+
+<body class="nk-body bg-white npc-general pg-error">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap justify-center">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="nk-block nk-block-middle wide-md mx-auto">
+                        <div class="nk-block-content nk-error-ld text-center">
+                            <img class="nk-error-gfx" src="<?php echo($base_url) ?>js/images/gfx/error-404.svg" alt="">
+                            <div class="wide-xs mx-auto">
+                                <h3 class="nk-error-title">Oops! Why you’re here?</h3>
+                                <p class="nk-error-text"> We are very sorry for inconvenience. It looks like you’re try to access a page that either has been deleted or never existed.</p>
+                                <a href="javascript:history.go(-1)" class="btn btn-lg btn-primary mt-2">Back To Home</a>
+                            </div>
+                        </div>
+                    </div><!-- .nk-block -->
+                </div>
+                <!-- wrap @e -->
+            </div>
+            <!-- content @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    <script src="<?php echo($base_url) ?>js/assets/js/bundle.js?ver=1.4.0"></script>
+    <script src="<?php echo($base_url) ?>js/assets/js/scripts.js?ver=1.4.0"></script>
+
 </html>

@@ -176,7 +176,7 @@
                                 </ul>
                             </li>
                              <li class="nk-menu-item">
-                                <a href="<?php echo(base_url()) ?>admin/info_picture" class="nk-menu-link" data-original-title="Nos services technologiques" title="Nos services technologiques">
+                                <a href="<?php echo(base_url()) ?>admin/info_picture" class="nk-menu-link" data-original-title="Images d'ilistration" title="Images d'ilistration">
                                     <span class="nk-menu-text"><i class="fa fa-camera"></i> Images d'ilistration </span>
                                 </a>
                             </li>

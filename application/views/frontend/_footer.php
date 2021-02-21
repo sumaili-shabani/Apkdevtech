@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-8">
                              <p class="my_footer_text">
-                                Les développeurs Devtech visent à construire l'avenir en éduquant et en résolvant les problèmes en utilisant la TECHNOLOGIE.
+                                <?php echo($description_info) ?>
                             </p>
                         </div>
                     </div>
@@ -39,16 +39,16 @@
                                         <hr>
                                     </div>
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">
+                                        <a href="<?php echo(base_url()) ?>home/projets" class="my_footer_text">
                                         &nbsp; Projets</a>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">&nbsp; À propos</a>
+                                        <a href="<?php echo(base_url()) ?>home/blog" class="my_footer_text">&nbsp; À propos</a>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">
+                                        <a href="<?php echo(base_url()) ?>home/galery" class="my_footer_text">
                                         &nbsp; Galérie</a>
                                     </div>
 
@@ -68,16 +68,16 @@
                                         <hr>
                                     </div>
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">&nbsp; Nous contacter</a>
+                                        <a href="<?php echo(base_url()) ?>home/contact" class="my_footer_text">&nbsp; Nous contacter</a>
                                     </div>
 
                                    
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">&nbsp; Nos blogs</a>
+                                        <a href="<?php echo(base_url()) ?>home/video" class="my_footer_text">&nbsp; Nos vidéos</a>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <a href="javascrit:void(0);" class="my_footer_text">&nbsp; Nos Cours</a>
+                                        <a href="<?php echo(base_url()) ?>login" class="my_footer_text">&nbsp; Se connecter</a>
                                     </div>
 
                                 </div>
@@ -121,31 +121,31 @@
                     <div class="col-md-5 mb-2">
                         <div class="col-md-12">
 
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm" style="border-radius: 100%;">
+                            <a href="<?php echo($facebook_info) ?>" target="_blank" class="btn btn-primary btn-sm" style="border-radius: 100%;">
                                 <em class="icon ni ni-facebook-f"></em>
                             </a> &nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-warning btn-sm" style="border-radius: 100%;">
+                            <a href="javascript:void(0);" target="_blank" class="btn btn-warning btn-sm" style="border-radius: 100%;">
                                 <em class="icon ni ni-youtube-fill"></em>
                             </a>&nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm" style="border-radius: 100%;">
+                            <a href="<?php echo($linkedin_info) ?>" target="_blank" class="btn btn-primary btn-sm" style="border-radius: 100%;">
                                <em class="icon ni ni-linkedin"></em>
                             </a>&nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-success btn-sm" style="border-radius: 100%;">
+                            <a href="tel:<?php echo($tel1_info) ?>" target="_blank" class="btn btn-success btn-sm" style="border-radius: 100%;">
                                 <em class="icon ni ni-whatsapp"></em>
                             </a>&nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-danger btn-sm" style="border-radius: 100%;">
+                            <a href="mailto:<?php echo($email_info) ?>" target="_blank" class="btn btn-danger btn-sm" style="border-radius: 100%;">
                                 <em class="icon ni ni-mail"></em>
                             </a>&nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm" style="border-radius: 100%;">
+                            <a href="<?php echo($twitter_info) ?>" target="_blank" class="btn btn-primary btn-sm" style="border-radius: 100%;">
                                 <em class="icon ni ni-twitter"></em>
                             </a>&nbsp;
 
-                            <a href="javascript:void(0);" class="btn btn-dark btn-sm" style="border-radius: 100%;">
+                            <a href="https://github.com/sumaili-shabani" target="_blank" class="btn btn-dark btn-sm" style="border-radius: 100%;">
                                <em class="icon ni ni-github"></em>
                             </a>&nbsp;
                            
@@ -168,8 +168,8 @@
                         </div>
                         <div class="nk-footer-links">
                             <ul class="nav nav-sm">
-                                <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Terme et contrat</a></li>
-                                <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Politique d'utilisation</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo(base_url()) ?>home/condition">Terme et contrat</a></li>
+                                <li class="nav-item"><a class="nav-link" href="<?php echo(base_url()) ?>home/politique">Politique d'utilisation</a></li>
                                 
                             </ul>
                         </div>

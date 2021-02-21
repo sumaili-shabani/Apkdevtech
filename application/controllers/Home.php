@@ -47,6 +47,8 @@ class home extends CI_Controller
 			$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
 			$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
 
+			$data['mini_projets']  = $this->crud_model->Select_contact_tinfo_projet_mini();
+
 			$data['menu']  = "/";
 			$this->load->view('frontend/home_default', $data);
 			// $this->load->view('frontend/templete', $data);
@@ -148,6 +150,7 @@ class home extends CI_Controller
 			
 		}
 
+		
 		function galery(){
 			$data['title']="Nos souvenirs photos!";
 			$data['users'] = $this->crud_model->fetch_connected($this->connected);
@@ -193,6 +196,105 @@ class home extends CI_Controller
 
 			$data['menu']  = "video";
 			$this->load->view('frontend/video', $data);
+			
+		}
+
+		function projet($param1=''){
+			$data['title']="Détail du projet!";
+			$data['users'] = $this->crud_model->fetch_connected($this->connected);
+			$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+			$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+			$data['familles']  = $this->crud_model->Select_contact_membre();
+			$data['services']  = $this->crud_model->Select_contact_service();
+			// statistiques
+			$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+			$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+			$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+			$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+			// finstatistique
+
+			$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+			$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+			$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+			$data['projects_detail']  = $this->crud_model->Select_contact_projets_detail($param1);
+
+
+			$data['menu']  = "projets";
+			$this->load->view('frontend/detail_projet', $data);
+			
+		}
+
+		function condition(){
+			$data['title']="Conditions générales d'utilisation du site";
+			$data['users'] = $this->crud_model->fetch_connected($this->connected);
+			$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+			$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+			$data['familles']  = $this->crud_model->Select_contact_membre();
+			$data['services']  = $this->crud_model->Select_contact_service();
+			// statistiques
+			$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+			$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+			$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+			$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+			// finstatistique
+
+			$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+			$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+			$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+			$data['menu']  = "blog";
+			$this->load->view('frontend/condition', $data);
+			
+		}
+
+		function politique(){
+			$data['title']="Politique de protection des données personnelles";
+			$data['users'] = $this->crud_model->fetch_connected($this->connected);
+			$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+			$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+			$data['familles']  = $this->crud_model->Select_contact_membre();
+			$data['services']  = $this->crud_model->Select_contact_service();
+			// statistiques
+			$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+			$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+			$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+			$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+			// finstatistique
+
+			$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+			$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+			$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+			$data['menu']  = "blog";
+			$this->load->view('frontend/politique', $data);
+			
+		}
+
+		function log(){
+			$data['title']="Authentification et droit droit d'accès au système";
+			$data['users'] = $this->crud_model->fetch_connected($this->connected);
+			$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+			$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+			$data['familles']  = $this->crud_model->Select_contact_membre();
+			$data['services']  = $this->crud_model->Select_contact_service();
+			// statistiques
+			$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+			$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+			$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+			$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+			// finstatistique
+
+			$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+			$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+			$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+			$data['menu']  = "blog";
+			$this->load->view('frontend/login', $data);
 			
 		}
 

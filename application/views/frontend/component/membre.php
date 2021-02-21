@@ -43,15 +43,15 @@
 		                                                        	<div class="col-1"></div>
 		                                                        	<div class="col-10">
 
-		                                                        		<a targey="_blank" href="<?php echo($key['facebook']) ?>" class="btn btn-icon btn-sm btn-primary btn-action">
+		                                                        		<a target="_blank" href="<?php echo($key['facebook']) ?>" class="btn btn-icon btn-sm btn-primary btn-action">
 		                                                        			<em class="icon ni ni-facebook-f"></em>
 		                                                        		</a>
 
-		                                                        		<a targey="_blank" href="mailto:<?php echo($key['email']) ?>" class="btn btn-icon btn-sm btn-danger btn-action"><em class="icon ni ni-google"></em></a>
+		                                                        		<a target="_blank" href="mailto:<?php echo($key['email']) ?>" class="btn btn-icon btn-sm btn-danger btn-action"><em class="icon ni ni-google"></em></a>
 
-		                                                        		<a targey="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-info btn-action"><em class="icon ni ni-linkedin-round"></em></a>
+		                                                        		<a target="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-info btn-action"><em class="icon ni ni-linkedin-round"></em></a>
 
-		                                                        		<a targey="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-primary btn-action"><em class="icon ni ni-twitter-round"></em></a>
+		                                                        		<a target="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-primary btn-action"><em class="icon ni ni-twitter-round"></em></a>
 
 		                                                        		
 		                                                        	</div>

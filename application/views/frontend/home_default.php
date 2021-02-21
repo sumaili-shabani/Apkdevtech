@@ -54,6 +54,8 @@
                             			</div>
                             			<!-- fin citation -->
 
+
+
                             			<?php 
                                 			if ($personelles->num_rows() > 0) {
                                 				foreach ($personelles->result_array() as $key) {
@@ -210,6 +212,50 @@
                                     </div>
                                 </div>
                                 <!-- fin SAVOIR PLUS SUR NOUS -->
+
+                                <!-- champs d'adhesion -->
+                                <div class="col-md-12" style="margin-top: 10px;">
+                                    <div class="row">
+
+                                        <!-- citation -->
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-8 text-center">
+
+                                                    <div class="col-md-12">
+                                                        <div class="nk-block-head-content text-center">
+                                                            <h4 class="nk-block-title fw-normal">Abonnez-vous déjà!</h4>
+                                                            <div class="nk-block-des">
+                                                                <p>Voici à présents quelques applications complètes  dont vous pouvez vous abonner</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <ul class="list list-lg list-checked-circle list-success">
+                                                        <li>
+                                                            <strong>
+                                                               Nous proposons des aplications complètes pour adhésion annuelle selon les différents plans par rapport à  votre choix.
+                                                            </strong>
+                                                        </li>
+                                                    </ul>
+                                                    
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                        </div>
+                                        <!-- fin citation -->
+                                        <div class="col-md-12">
+
+                                           <?php include('component/mini_project.php') ?>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <!-- fin champs d'adhesion -->
+
+
 
                                 <!-- bloc attantes -->
                                 <?php include('component/comprendre.php') ?>

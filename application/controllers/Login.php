@@ -13,17 +13,74 @@ class login extends CI_Controller
 
 
 	public function index(){
-		$data["title"] = "Connexion au système devtechnology";  
-		$this->load->view('login', $data);
-		// $this->load->view('panel', $data);
+
+
+		$data['title']="Authentification et droit droit d'accès au système";
+
+		$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+		$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+		$data['familles']  = $this->crud_model->Select_contact_membre();
+		$data['services']  = $this->crud_model->Select_contact_service();
+		// statistiques
+		$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+		$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+		$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+		$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+		// finstatistique
+
+		$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+		$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+		$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+		$data['menu']  = "blog";
+		$this->load->view('frontend/login', $data);
 	}
 	public function register(){
 		$data["title"] = "Devenez de à présent membre au système devtechnology";  
-		$this->load->view('register', $data);
+		$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+		$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+		$data['familles']  = $this->crud_model->Select_contact_membre();
+		$data['services']  = $this->crud_model->Select_contact_service();
+		// statistiques
+		$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+		$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+		$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+		$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+		// finstatistique
+
+		$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+		$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+		$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+		$data['menu']  = "";
+		$this->load->view('frontend/register', $data); 
+
+
 	}
 	public function forgot(){
-		$data["title"] = "Avez-vous oublié votre mot de passe au système devtechnology";  
-		$this->load->view('forgot', $data);
+		$data["title"] = "Avez-vous oublié votre mot de passe au système devtechnology"; 
+
+		$data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+		$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+		$data['familles']  = $this->crud_model->Select_contact_membre();
+		$data['services']  = $this->crud_model->Select_contact_service();
+		// statistiques
+		$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+		$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+		$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+		$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+		// finstatistique
+
+		$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+		$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+		$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+		$data['menu']  = "";
+		$this->load->view('frontend/forgot', $data); 
+		// $this->load->view('forgot', $data);
 	}
 	public function accueil(){
 		echo("bonjour dans le codeigner");
@@ -119,11 +176,11 @@ class login extends CI_Controller
 	      
 	}
 
-	function panel(){
-		$data['title']="mon profile";
-		$this->load->view('backend/apprenant/panel', $data);
+	// function panel(){
+	// 	$data['title']="mon profile";
+	// 	$this->load->view('backend/apprenant/panel', $data);
 
-	}
+	// }
 
 	function register_validation()
   	 {
@@ -195,11 +252,6 @@ class login extends CI_Controller
 		redirect('login', 'refresh');
 	}
 
-	function recupere_secure(){
-		$data["title"] = "Récupération mot de passe";  
-		$this->load->view('forgot', $data);
-	}
-
 	
 
     function change_secure($param1='', $param2='',$param3='')
@@ -217,7 +269,25 @@ class login extends CI_Controller
 
         }
 
-        $this->load->view('secure', $data);
+        $data['personelles'] = $this->crud_model->Select_articles_tinfo_personnel();
+
+		$data['contact_info_site']  = $this->crud_model->Select_contact_info_site();
+		$data['familles']  = $this->crud_model->Select_contact_membre();
+		$data['services']  = $this->crud_model->Select_contact_service();
+		// statistiques
+		$data['nombre_users']   		= $this->crud_model->statistiques_nombre("users");
+		$data['nombre_services']   		= $this->crud_model->statistiques_nombre("tinfo_service");
+		$data['nombre_tinfo_projet']   	= $this->crud_model->statistiques_nombre("tinfo_projet");
+		$data['nombre_tinfo_user']   	= $this->crud_model->statistiques_nombre("tinfo_user");
+		// finstatistique
+
+		$data['projects_cool']  = $this->crud_model->Select_contact_projets_cool();
+		$data['services_techno']  = $this->crud_model->Select_contact_service_techno();
+		$data['services_choix']  = $this->crud_model->Select_contact_tinfo_choix();
+
+		$data['menu']  = "";
+		$this->load->view('frontend/secure', $data); 
+
     }
 
 

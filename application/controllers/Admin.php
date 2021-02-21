@@ -4590,12 +4590,60 @@ class admin extends CI_Controller
 	}
 	  // fin pagination
 
+     // pagination picture de projet ulistration 
+   function pagination_galery_picture()
+  {
+
+  $this->load->library("pagination");
+  $config = array();
+  $config["base_url"] = "#";
+  $config["total_rows"] = $this->crud_model->fetch_pagination_picture();
+  $config["per_page"] = 4;
+  $config["uri_segment"] = 3;
+  $config["use_page_numbers"] = TRUE;
+  $config["full_tag_open"] = '<ul class="pagination">';
+  $config["full_tag_close"] = '</ul>';
+  $config["first_tag_open"] = '<li class="page-item">';
+  $config["first_tag_close"] = '</li>';
+  $config["last_tag_open"] = '<li class="page-item">';
+  $config["last_tag_close"] = '</li>';
+  $config['next_link'] = '<li class="page-item active"><i class="btn btn-info">&gt;&gt;</i>';
+  $config["next_tag_open"] = '<li class="page-item">';
+  $config["next_tag_close"] = '</li>';
+  $config["prev_link"] = '<li class="page-item active"><i class="btn btn-info">&lt;&lt;</i>';
+  $config["prev_tag_open"] = "<li class='page-item'>";
+  $config["prev_tag_close"] = "</li>";
+  $config["cur_tag_open"] = "<li class='page-item active'><a href='#' class='page-link'>";
+  $config["cur_tag_close"] = "</a></li>";
+  $config["num_tag_open"] = "<li class='page-item'>";
+  $config["num_tag_close"] = "</li>";
+  $config["num_links"] = 1;
+  $this->pagination->initialize($config);
+  $page = $this->uri->segment(3);
+  $start = ($page - 1) * $config["per_page"];
+
+  $output = array(
+   'pagination_link' => $this->pagination->create_links(),
+   'country_table'   => $this->crud_model->fetch_details_pagination_picture($config["per_page"], $start)
+  );
+  echo json_encode($output);
+  }
+    // fin pagination
+
 	function supression_photo_galery(){
 
 	  $this->crud_model->delete_photo_galery($this->input->post("idg"));
 	  echo("suppression avec succès");
 
 	}
+
+  //suppression de quelques exemple d'ulistration
+  function supression_photo_picture(){
+
+    $this->crud_model->delete_photo_picture($this->input->post("idd"));
+    echo("suppression avec succès");
+
+  }
 
 
 
