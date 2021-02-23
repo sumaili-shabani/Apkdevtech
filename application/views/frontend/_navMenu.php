@@ -135,6 +135,9 @@
 	                	if ($this->session->userdata('admin_login')) {
 	                		include('component/admin_param.php');
 	                	}
+                        if ($this->session->userdata('id')) {
+                            include('component/user_param.php');
+                        }
 
                 	?>
 

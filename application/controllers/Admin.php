@@ -27,7 +27,7 @@ class admin extends CI_Controller
 		function index(){
 			$data['title']="mon profile admin";
 			// $this->load->view('backend/admin/dashbord', $data);
-			redirect('admin/statistiques','refresh');
+			redirect('admin/profile','refresh');
 		}
 
     function info_personnel(){
