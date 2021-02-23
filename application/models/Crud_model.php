@@ -3132,6 +3132,71 @@ class crud_model extends CI_Model{
 	  }
 	  // fin pagination
 
+
+	  // pagination des utilisateurs connecters
+	  function fetch_details_pagination_to_users_count2($limit, $start)
+	  {
+	  	  $output = '';
+	      $this->db->select("*");
+	      $this->db->from("users");
+	      $this->db->order_by("first_name", "ASC");
+	      $this->db->limit($limit, $start);
+	      $query = $this->db->get();
+
+	      $id = $this->session->userdata('id');
+	      $etat = '';
+	      
+	      foreach($query->result() as $row)
+	      {
+
+
+            if ($row->id != $id) {
+              $etat = '
+              <a href="'.base_url().'user/chat_admin/'.$id.'/'.$row->id.'"><i class="fa fa-comment"></i></a>';
+            }
+            else{
+
+              $etat = '
+              <a href="'.base_url().'user/detail_users_profile/'.$row->id.'"><i class="fa fa-user"></i></a> ';
+              
+            }
+
+	      	
+	       $output .= '
+
+	       <div class="nk-msg-item" data-msg-id="2">
+	            <div class="nk-msg-media user-avatar">
+	                <img src="'.base_url().'upload/photo/'.$row->image.'" alt="">
+	            </div>
+	            <div class="nk-msg-info">
+	                <div class="nk-msg-from">
+	                    <div class="nk-msg-sender">
+	                        <div class="name"><a href="javascript:void(0);">'.$row->first_name.' '.substr($row->last_name, 0,25).'</a></div>
+	                    </div>
+	                    <div class="nk-msg-meta">
+	                        <div class="date">'.$etat.'</div>
+	                    </div>
+	                </div>
+	                <div class="nk-msg-context">
+	                    <div class="nk-msg-text">
+	                        <h6 class="title">'.$row->email.'</h6>
+	                        <p>'.substr($row->biographie, 0,50).'...</p>
+	                    </div>
+	                    <div class="nk-msg-lables">
+	                        <div class="asterisk"><a class="active" href="#"><em class="asterisk-off icon ni ni-star"></em><em class="asterisk-on icon ni ni-star-fill"></em></a></div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+		     
+
+	       ';
+	      }
+	      
+	      return $output;
+	  }
+	  // fin pagination
+
 	  function delete_notifacation_tag($id){
 	  	$this->db->where('id', $id);
         $this->db->delete('notification');
@@ -3202,6 +3267,72 @@ class crud_model extends CI_Model{
 	         
 	        <li class="online">
 	                <a href="'.base_url().'admin/detail_users_profile/'.$row->id_user.'">
+	                    <div class="media">
+	                        <div class="avtar-pic w35 bg-red">
+	                          <span>
+	                          <img src="'.base_url().'upload/photo/'.$row->image.'" class="img img-responsive img-circle" style="width: 50px; height: 40px; border-radius: 70%;">
+	                          <span class="badge badge-success status badge-sm" >en ligne</span>
+	                            </span>
+	                        </div>
+	                        <div class="media-body" style="padding-right: 10px;">
+	                            <span class="name text-info">&nbsp;&nbsp;@'.$row->first_name.' '.substr($row->last_name, 0,25).' </span> <br>
+	                            '.$etat.'
+
+	                            
+	                        </div>
+	                    </div>
+	                </a>
+	            </li>
+	            
+
+	         ';
+	        }
+	        
+	        return $output;
+    }
+
+
+     // pagination des utilisateurs connecters
+	function fetch_details_pagination_online_connected2($limit, $start){
+	          $output = '';
+	        $this->db->select("*");
+	        $this->db->from("profile_online");
+	        $this->db->order_by("first_name", "ASC");
+	        $this->db->limit($limit, $start);
+	        $query = $this->db->get();
+
+	        $id = $this->session->userdata('id');
+	        $etat = '';
+	        
+	        foreach($query->result() as $row)
+	        {
+
+	          if ($row->id_user != $id) {
+	              $etat = '<span class="message">
+	                <a href="'.base_url().'user/chat_admin/'.$id.'/'.$row->id_user.'">
+	              &nbsp;&nbsp;<i class="fa fa-comments-o"></i> message
+	                  </a> 
+	                </span>';
+	            }
+	            else{
+
+	              $etat = '
+
+	              <span class="message">
+	                <a href="'.base_url().'user/detail_users_profile/'.$row->id_user.'" class="text-warning">
+	              &nbsp;&nbsp;<i class="fa fa-user"></i> profile
+	                  </a> 
+	                </span>
+
+	              ';
+
+	              
+	            }
+
+	         $output .= '
+	         
+	        <li class="online">
+	                <a href="javascrip:void(0);">
 	                    <div class="media">
 	                        <div class="avtar-pic w35 bg-red">
 	                          <span>
@@ -4050,7 +4181,7 @@ class crud_model extends CI_Model{
     //famille
     function Select_contact_membre()
     {
-      	return $this->db->query('SELECT * FROM tinfo_user  LIMIT 6');
+      	return $this->db->query('SELECT * FROM tinfo_user ORDER BY first_name ASC LIMIT 6');
     }
 
     //projets
@@ -4349,9 +4480,9 @@ class crud_model extends CI_Model{
 
     	
      $output .= '
-     <div class="col-md-6 mb-2">
+     <div class="col-md-6 mb-2 img-responsive">
         <a download="'.base_url().'upload/galery/'.$key->image.'" href="'.base_url().'upload/galery/'.$key->image.'">
-            <img src="'.base_url().'upload/galery/'.$key->image.'" alt="" style="height: 190px; width: 100%;">
+            <img src="'.base_url().'upload/galery/'.$key->image.'" alt="" style="width: 100%;height: 330px;;" class="img img-responsive img-thumbnail">
             <em class="icon ni ni-download"></em>
 
         </a>

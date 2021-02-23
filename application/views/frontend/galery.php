@@ -7,6 +7,22 @@
     	.my_footer_text{
     		color: rgb(181, 216, 242);
     	}
+
+        element.style {
+            height: 200px;
+            width: 100%;
+        }
+        @media (max-width: 1199px)
+        .advertisement img {
+            max-width: 100%;
+        }
+        img {
+            vertical-align: middle;
+        }
+        img {
+            border: 0;
+        }
+        
     </style>
 </head>
 

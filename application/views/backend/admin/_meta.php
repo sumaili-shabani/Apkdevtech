@@ -1,9 +1,52 @@
+<?php 
+$icone_info;
+$tel1_info;
+$tel2_info ;
+$adresse_info ;
+$facebook_info ;
+$twitter_info;
+$linkedin_info;
+$email_info ;
+$termes_info;
+$confidentialite_info ;
+$description_info;
+$mission_info;
+$objectif_info;
+$blog_info;
+$nom_site_info;
+
+$contact_info_site = $this->db->query('SELECT * FROM tbl_info  LIMIT 1');
+
+if ($contact_info_site->num_rows() > 0) {
+  foreach ($contact_info_site->result_array() as $key) {
+    $nom_site_info = $key['nom_site'];
+    $icone_info = base_url().'upload/tbl_info/'.$key['icone'];
+    $tel1_info = $key['tel1'];
+    $tel2_info = $key['tel2'];
+    $adresse_info = $key['adresse'];
+    $facebook_info = $key['facebook'];
+    $twitter_info = $key['twitter'];
+    $linkedin_info = $key['linkedin'];
+    $email_info = $key['email'];
+    $termes_info = $key['termes'];
+    $confidentialite_info = $key['confidentialite'];
+    $description_info = $key['description'];
+    $mission_info = $key['mission'];
+    $objectif_info = $key['objectif'];
+    $blog_info = $key['blog'];
+
+  }
+
+}
+
+
+ ?>
 <meta charset="utf-8">
-<meta name="author" content="devtech">
+<meta name="author" content="<?php echo($nom_site_info) ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="est une startupe de la nouvelle nouvelle technologie">
+<meta name="description" content="<?php echo($description_info) ?>">
 <!-- Fav Icon  -->
-<link rel="shortcut icon" href="<?= base_url('js/images/favicon.png')?>">
+<link rel="shortcut icon" href="<?php echo($icone_info) ?>">
 <!-- Page Title  -->
 <title><?php echo($title); ?></title>
 <!-- StyleSheets  -->

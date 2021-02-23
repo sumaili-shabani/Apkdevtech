@@ -448,7 +448,7 @@
                         <a href="javascript:void(0);" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
                             <div class="icon-status icon-status-info"><i class="fa fa-comments-o"></i>
                                 <sup>
-                                    <span class="badge badge-light badge-xs">2</span>
+                                    <span class="badge badge-light badge-xs"><?php echo($nombre_de_message) ?></span>
                                 </sup>
                             </div>
                         </a>
