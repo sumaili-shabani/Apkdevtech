@@ -51,7 +51,7 @@
 
 		                                                        		<a target="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-info btn-action"><em class="icon ni ni-linkedin-round"></em></a>
 
-		                                                        		<a target="_blank" href="mailto:<?php echo($key['linkedin']) ?>" class="btn btn-icon btn-sm btn-primary btn-action"><em class="icon ni ni-twitter-round"></em></a>
+		                                                        		<a target="_blank" href="mailto:<?php echo($key['twitter']) ?>" class="btn btn-icon btn-sm btn-primary btn-action"><em class="icon ni ni-twitter-round"></em></a>
 
 		                                                        		
 		                                                        	</div>
