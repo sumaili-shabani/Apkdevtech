@@ -4480,9 +4480,9 @@ class crud_model extends CI_Model{
 
     	
      $output .= '
-     <div class="col-md-6 mb-2 img-responsive">
+     <div class="col-md-6 mb-2">
         <a download="'.base_url().'upload/galery/'.$key->image.'" href="'.base_url().'upload/galery/'.$key->image.'">
-            <img src="'.base_url().'upload/galery/'.$key->image.'" alt="" style="width: 100%;height: 330px;;" class="img img-responsive img-thumbnail">
+            <img src="'.base_url().'upload/galery/'.$key->image.'" alt="" class="img-thumbnail img-responsive" style="height: 200px;" />
             <em class="icon ni ni-download"></em>
 
         </a>
